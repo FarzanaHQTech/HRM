@@ -12,7 +12,7 @@
         <li><a href="attendance.html">Attendance (Admin)</a></li>
         <li><a href="attendance-employee.html">Attendance (Employee)</a></li>
         <li><a href="<?php echo $base_url?>/Department">Departments</a></li>
-        <li><a href="designations.html">Designations</a></li>
+        <li><a href="<?php echo $base_url?>/designation">Designations</a></li>
         <li><a href="timesheet.html">Timesheet</a></li>
         <li><a href="shift-scheduling.html">Shift & Schedule</a></li>
         <li><a href="overtime.html">Overtime</a></li>
