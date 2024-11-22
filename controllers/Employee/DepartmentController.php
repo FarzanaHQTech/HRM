@@ -52,6 +52,7 @@ class DepartmentController
     function confirm_delete($id)
     {
         $result = Department::delete($id);
+        print_r($result);
         if ($result) {
             redirect("index");
         }
