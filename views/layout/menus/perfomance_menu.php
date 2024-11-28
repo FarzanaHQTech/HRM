@@ -4,7 +4,7 @@
 <li class="submenu">
     <a href="#"><i class="la la-laptop-medical"></i> <span> Performance </span> <span class="menu-arrow"></span></a>
     <ul>
-        <li><a href="performance-indicator.html"> Performance Indicator </a></li>
+        <li><a href="<?php echo $base_url?>/perfomIndecator"> Performance Indicator </a></li>
         <li><a href="performance.html"> Performance Review </a></li>
         <li><a href="performance-appraisal.html"> Performance Appraisal </a></li>
     </ul>

@@ -35,8 +35,8 @@
 <li class="submenu">
     <a href="#"><i class="la la-money-bill-wave"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
     <ul>
-        <li><a href="salary.html"> Employee Salary </a></li>
-        <li><a href="salary-view.html"> Payslip </a></li>
+        <li><a href="<?php echo $base_url?>/EmployeeSalary"> Employee Salary </a></li>
+        <li><a href="<?php echo $base_url?>/payslip"> Payslip </a></li>
         <li><a href="payroll-items.html"> Payroll Items </a></li>
     </ul>
 </li>
@@ -52,7 +52,7 @@
         <li><a href="project-reports.html"> Project Report </a></li>
         <li><a href="task-reports.html"> Task Report </a></li>
         <li><a href="user-reports.html"> User Report </a></li>
-        <li><a href="employee-reports.html"> Employee Report </a></li>
+        <li><a href="<?php echo $base_url?>/Record"> Employee Report </a></li>
         <li><a href="payslip-reports.html"> Payslip Report </a></li>
         <li><a href="attendance-reports.html"> Attendance Report </a></li>
         <li><a href="leave-reports.html"> Leave Report </a></li>

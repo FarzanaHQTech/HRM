@@ -6,15 +6,17 @@ class User
   public $id;
   public $username;
   public $email;
+  public $password;
   public $mobile;
   // public $image;
   public $role_id;
   public $company_id;
-  public function __construct($id, $username, $email, $mobile, $role_id, $company_id)
+  public function __construct($id, $username, $email,$password, $mobile, $role_id, $company_id)
   {
     $this->id = $id;
     $this->username = $username;
     $this->email = $email;
+    $this->password = $password;
     $this->mobile = $mobile;
     // $this->image = $image;  
     $this->role_id = $role_id;
@@ -23,7 +25,7 @@ class User
   public function add()
   {
     global $db;
-    $result = $db->query("insert into users (username,email,mobile,role_id,company_id) values('$this->username','$this->email','$this->mobile',$this->role_id,$this->company_id)");
+    $result = $db->query("insert into users (username,email,password,mobile,role_id,company_id) values('$this->username','$this->email','$this->password','$this->mobile',$this->role_id,$this->company_id)");
     return $result;
   }
  
@@ -60,7 +62,7 @@ class User
   {
 
     global $db;
-    $result = $db->query("update users set username = '$this->username', email='$this->email', mobile='$this->mobile',role_id = '$this->role_id',role_id = '$this->company_id' where id = $this->id");
+    $result = $db->query("update users set username = '$this->username', email='$this->email', mobile='$this->mobile',role_id = $this->role_id,role_id = $this->company_id where id = $this->id");
     return $result;
   }
   public static function delete($id)

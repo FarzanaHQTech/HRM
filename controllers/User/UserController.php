@@ -14,12 +14,15 @@ class UserController
     if (isset($_POST['createUser'])) {
       $user_name = $_POST['user_name'];
       $email = $_POST['email'];
+      $password = $_POST['password'];
       $phone = $_POST['phone'];
       $role = $_POST['role'];
       $company = $_POST['company'];
       // $person_id = $_POST['person_id'];
 
-      $createuser = new User(null, $user_name, $email, $phone, $role, $company);
+      $createuser = new User(null, $user_name, $email,$password, $phone, $role, $company);
+      // print_r($company);
+      // die();
       echo $createuser->add();
     }
     redirect('index');
@@ -73,9 +76,9 @@ class UserController
       $company= htmlspecialchars($_POST['company']);
       // $person_id = htmlspecialchars($_POST['person_id']);
 
-      $editObj = new User($id,$user_name,$email,$phone,$role,$company);
+      $editObj = new User($id,$user_name,$email,"",$phone,$role,$company);
       
-     $result=  $editObj->edit();
+     $result=  $editObj->edit($id);
      //print_r($result);
    
     }

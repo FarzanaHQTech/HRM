@@ -1,3 +1,5 @@
+
+
 <?php
 $companies = Company::display();
 ?>
@@ -6,6 +8,7 @@ $companies = Company::display();
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="input-block mb-3">
+
 											<?php foreach($companies as $value):?>
 											<label class="col-form-label">Company Name <span class="text-danger">*</span></label>
 											<input class="form-control" type="text" value="<?= $value['company_name']?>">
@@ -99,3 +102,8 @@ $companies = Company::display();
 									<button class="btn btn-primary submit-btn">Save</button>
 								</div>
 							</form>
+							<script>
+    $(function() {
+        alert('This is a test alert!');
+    });
+</script>

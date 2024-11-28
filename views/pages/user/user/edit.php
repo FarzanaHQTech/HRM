@@ -1,4 +1,6 @@
-
+<?php $roles = Role::display();
+    $company = Company::display();
+?>
 <h2 class="text-center">Update user</h2>
 <div class="container  w-50 p-3">
     <form action="<?php echo $base_url?>/user/update_all" method="post">

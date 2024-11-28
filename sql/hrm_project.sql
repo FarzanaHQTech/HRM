@@ -44,11 +44,13 @@ CREATE TABLE `employees` (
   `department_id` int(11) DEFAULT NULL,
   `designation_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL,
+  `dob` date DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `gender` varchar(50) DEFAULT NULL,
   `marital_status_id` int(11) DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
+  `terminated_date` date DEFAULT NULL,
+  `salary_id` int,
   `experience` varchar(100) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL,
@@ -120,3 +122,53 @@ INSERT INTO `users` (`id`, `username`, `role_id`, `full_name`, `password`, `emai
 (2, 'Hasan', 1, 'Hasan Khan', 'admin123', 'hasan@gamil.com', NULL, '12334', 10, '01928137343', 1, NULL, '123', '2024-11-21 13:13:50'),
 (3, 'Rita Khanom', 3, NULL, 'rita1234', 'rita@gmail.com', NULL, '1234', 0, '01789327811', 2, NULL, NULL, '2024-11-21 13:12:31');
 
+
+CREATE Table IF NOT EXISTS martial_status (
+   id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(100), 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE Table IF NOT EXISTS status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    status_name VARCHAR(50) NOT NULL UNIQUE
+    description TEXT
+);
+
+-- Insert default statuses
+INSERT INTO Status (status_name, description) VALUES 
+('Active', 'Currently employed and active'),
+('Terminated', 'Employment terminated by the organization'),
+('Resigned', 'Employee voluntarily resigned');
+
+
+CREATE Table  IF NOT EXISTS Client (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_name VARCHAR(150),
+    email varchar(100),
+    phone varchar(50),
+    password varchar(250),
+    project_id INT,
+    -- description TEXT,
+    company_id INT, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    
+);
+CREATE Table IF NOT EXISTS Projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    project_name VARCHAR(255),
+    description TEXT,
+    start_date DATE,
+    end_date DATE,
+    client_id INT,
+    rate DECIMAL(10,2),
+    rate_type varchar(50),
+    priority varchar(50),
+    team_leader varchar(50),
+    project_team varchar(100),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  
+);

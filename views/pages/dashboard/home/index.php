@@ -1,5 +1,5 @@
      <!-- Page Header -->
-     <?php if (($_SESSION['urole']) == "Admin") { ?>
+     <?php if ($_SESSION['urole'] == "Admin") { ?>
          <div class="page-header">
              <div class="row">
                  <div class="col-sm-12">
@@ -718,3 +718,12 @@
              </div>
          </div>
      <?php } ?>
+<script>
+     $(function() {
+
+        
+        alert();
+// $("select").select2();
+
+});
+</script>

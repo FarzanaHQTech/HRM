@@ -32,8 +32,10 @@
                 <th scope="row"><?=$row['company']?></th>
                 
                 <th scope="row">
+                <a href="<?=$base_url?>/user/search/" class="btn btn-success">Details</a>
                 <a href="<?=$base_url?>/user/edit/<?=$row['id']?>" class="btn btn-secondary">Edit</a>
                     <a href="<?=$base_url?>/user/delete/<?=$row['id']?>" class="btn btn-danger">Delete</a>
+                  
                 </th>
             </tr>   
             <?php endforeach ; ?> 

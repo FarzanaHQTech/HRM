@@ -271,7 +271,7 @@
 	            <div class="dropdown-menu">
 	                <a class="dropdown-item" href="profile.html">My Profile</a>
 	                <a class="dropdown-item" href="<?php echo $base_url ?>/Setting">Settings</a>
-	                <a class="dropdown-item" href="index.html">Logout</a>
+	                <a class="dropdown-item" href="<?php echo $base_url?>/logout.php">Logout</a>
 	            </div>
 	        </li>
 	    </ul>

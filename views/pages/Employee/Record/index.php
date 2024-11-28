@@ -1,438 +1,168 @@
-				<!-- Add Employee Modal -->
-            
-				<div id="add_employee" class="modal custom-modal fade" role="dialog">
-					<div class="modal-dialog modal-dialog-centered modal-lg">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Add Employee</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form>
-									<div class="row">
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">First Name <span class="text-danger">*</span></label>
-												<input class="form-control" type="text">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Last Name</label>
-												<input class="form-control" type="text">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Username <span class="text-danger">*</span></label>
-												<input class="form-control" type="text">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Email <span class="text-danger">*</span></label>
-												<input class="form-control" type="email">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Password</label>
-												<input class="form-control" type="password">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Confirm Password</label>
-												<input class="form-control" type="password">
-											</div>
-										</div>
-										<div class="col-sm-6">  
-											<div class="input-block mb-3">
-												<label class="col-form-label">Employee ID <span class="text-danger">*</span></label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-sm-6">  
-											<div class="input-block mb-3">
-												<label class="col-form-label">Joining Date <span class="text-danger">*</span></label>
-												<div class="cal-icon"><input class="form-control datetimepicker" type="text"></div>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Phone </label>
-												<input class="form-control" type="text">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Company</label>
-												<select class="select">
-													<option value="">Global Technologies</option>
-													<option value="1">Delta Infotech</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Department <span class="text-danger">*</span></label>
-												<select class="select">
-													<option>Select Department</option>
-													<option>Web Development</option>
-													<option>IT Management</option>
-													<option>Marketing</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="input-block mb-3">
-												<label class="col-form-label">Designation <span class="text-danger">*</span></label>
-												<select class="select">
-													<option>Select Designation</option>
-													<option>Web Designer</option>
-													<option>Web Developer</option>
-													<option>Android Developer</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="table-responsive m-t-15">
-										<table class="table table-striped custom-table">
-											<thead>
-												<tr>
-													<th>Module Permission</th>
-													<th class="text-center">Read</th>
-													<th class="text-center">Write</th>
-													<th class="text-center">Create</th>
-													<th class="text-center">Delete</th>
-													<th class="text-center">Import</th>
-													<th class="text-center">Export</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Holidays</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Leaves</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Clients</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Projects</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Tasks</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Chats</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Assets</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-												<tr>
-													<td>Timing Sheets</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" checked>													
-															<span class="checkmark"></span>
-													</label>																			
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-													<td class="text-center">
-														<label class="custom_check">
-															<input type="checkbox" name="rememberme" class="rememberme">
-															<span class="checkmark"></span>
-														</label>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="submit-section">
-										<button class="btn btn-primary submit-btn">Submit</button>
-									</div>
-								</form>
+<?php
+$employees = Employee::display();
+;
+?>
+
+<div class="content container-fluid">
+
+
+	<!-- Page Header -->
+	<div class="page-header">
+		<div class="row">
+			<div class="col">
+				<h3 class="page-title">Employee Report</h3>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a></li>
+					<li class="breadcrumb-item active">Employee Report</li>
+				</ul>
+			</div>
+			<div class="col-auto">
+				<a href="#" class="btn btn-primary">PDF</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Page Header -->
+
+	<!-- Content Starts -->
+
+	<!-- Search Filter -->
+	<div class="row filter-row mb-4">
+		<div class="col-sm-6 col-md-3">
+			<div class="input-block mb-3 form-focus">
+				<input class="form-control floating" type="text">
+				<label class="focus-label">Employee</label>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-3">
+			<div class="input-block mb-3 ">
+				<select class="form-select form-control">
+					<option>Select Department</option>
+					<option>Designing</option>
+					<option>Development</option>
+					<option>Finance</option>
+					<option>Hr &amp; Finance</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-3">
+			<div class="input-block mb-3 form-focus">
+				<div class="cal-icon">
+					<input class="form-control floating datetimepicker" type="text">
+				</div>
+				<label class="focus-label">From</label>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-3">
+			<div class="input-block mb-3 form-focus">
+				<div class="cal-icon">
+					<input class="form-control floating datetimepicker" type="text">
+				</div>
+				<label class="focus-label">To</label>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-3">
+			<div class="d-grid">
+				<a href="#" class="btn btn-success"> Search </a>
+			</div>
+		</div>
+	</div>
+	<!-- /Search Filter -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-responsive">
+				<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+					<div class="row">
+						<div class="col-sm-12 col-md-6">
+							<div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm">
+										<option value="10">10</option>
+									</select> entries</label></div>
+						</div>
+						<div class="col-sm-12 col-md-6"></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<table class="table table-striped custom-table mb-0 datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+								<thead>
+									<tr role="row">
+										<th style="width: 179.547px;">ID</th>
+										<th style="width: 179.547px;">Employee Name</th>
+										<th style="width: 104.641px;">Employee Type</th>
+										<th style="width: 178.703px;">Email</th>
+										<th style="width: 116.672px;">Department</th>
+										<th style="width: 142.234px;">Designation</th>
+										<th style="width: 86.9844px;">Joining Date</th>
+										<th style="width: 75.5312px;">DOB</th>
+										<th style="width: 96.8594px;">Martial Status</th>
+										<th column ascending" style="width: 51.3906px;">Gender</th>
+										<th style="width: 114.094px;">Terminated Date</th>
+
+										<th style="width: 47.9219px;">Salary</th>
+										<th aria-label="Address: activate to sort column ascending" style="width: 325.859px;">Address</th>
+										<th style="width: 115.406px;">Contact Number</th>
+										<th style="width: 186.875px;">Emercency Contact Details</th>
+										<th a style="width: 184.234px;">Experience</th>
+										<th style="width: 55.9688px;">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+
+
+
+
+									<?php foreach ($employees as $value): ?>
+										<tr class="odd">
+											<td><?php echo $value['id'] ?></td>
+											<td class="sorting_1">
+												<h2 class="table-avatar">
+													<a href="profile.html" class="avatar"><img src="<?php echo $base_url?>/img/employees/<?= $value['image']?>" alt="User Image"></a>
+													<a href="profile.html" class="text-primary"><?php echo $value['first_name'] . " " . $value['last_name'] ?> <span></span></a>
+												</h2>
+											</td>
+											<td><?php echo $value['role'] ?></td>
+											<td class="text-info"><?php echo $value['email'] ?></td>
+											<td><?php echo $value['department'] ?></td>
+											<td><?php echo $value['designation'] ?></td>
+											<td><?php echo $value['joining_date'] ?></td>
+											<td><?php echo $value['dob'] ?></td>
+											<td><?php echo $value['martial_status'] ?></td>
+											<td><?php echo $value['gender'] ?></td>
+											<td><?php echo $value['terminated_date'] ?></td>
+											
+											<td><?php echo $value['basic_salary'] ?></td>
+											
+											<td>
+												<?php echo $value['address'] ?>
+											</td>
+											<td><?php echo $value['mobile'] ?></td>
+											<td><?php echo $value['mobile'] ?></td>
+											<td><?php echo $value['experience'] ?></td>
+											<td><button class="btn btn-outline-success btn-sm"><?php echo $value['status'] ?></button></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 col-md-5">
+							<div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div>
+						</div>
+						<div class="col-sm-12 col-md-7">
+							<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+								<ul class="pagination">
+									<li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link"><i class="fa fa-angle-double-left"></i> </a></li>
+									<li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+									<li class="paginate_button page-item next disabled" id="DataTables_Table_0_next"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link"> <i class=" fa fa-angle-double-right"></i></a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- /Add Employee Modal -->
+			</div>
+		</div>
+	</div>
+
+
+	<!-- /Content End -->
+
+</div>

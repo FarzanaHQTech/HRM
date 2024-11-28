@@ -27,7 +27,7 @@ if (isset($_POST["btnSignIn"])) {
       $_SESSION["mobile"] = $row->mobile;
       $_SESSION["role_id"] = $row->role_id;
       $_SESSION["urole"] = $row->role;
-      if ($_SESSION['urole'] == "Admin") {
+      if ($_SESSION['urole'] == "Admin" ) {
         header("location:home");
       } elseif (($_SESSION['urole']) == "Employee") {
         header("location:employee");
@@ -89,7 +89,7 @@ if (isset($_POST["btnSignIn"])) {
   <!-- Main Wrapper -->
   <div class="main-wrapper">
     <div class="account-content">
-      <a href="job-list.html" class="btn btn-primary apply-btn">Apply Job</a>
+      <a href="applyjob.php" class="btn btn-primary apply-btn">Apply Job</a>
       <div class="container">
 
         <!-- Account Logo -->
@@ -130,7 +130,7 @@ if (isset($_POST["btnSignIn"])) {
                 <button class="btn btn-primary account-btn" type="submit" name="btnSignIn">Login</button>
               </div>
               <div class="account-footer">
-                <p>Don't have an account yet? <a href="register.html">Register</a></p>
+                <p>Don't have an account yet? <a href="register.php">Register</a></p>
               </div>
             </form>
             <!-- /Account Form -->
@@ -202,3 +202,5 @@ if (isset($_POST["btnSignIn"])) {
 <!-- Mirrored from smarthr.dreamstechnologies.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Nov 2024 15:14:39 GMT -->
 
 </html>
+
+
