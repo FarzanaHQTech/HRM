@@ -6,8 +6,8 @@
     <ul>
         <li><a href="<?php echo $base_url?>/cardemployee">All Employees</a></li>
         <li><a href="<?php echo $base_url?>/Holiday">Holidays</a></li>
-        <li><a href="<?php echo $base_url?>/Leave">Leaves (Admin) <span class="badge rounded-pill bg-primary float-end">1</span></a></li>
-        <li><a href="<?php echo $base_url?>/LeaveEmployee">Leaves (Employee)</a></li>
+        <li><a href="<?php echo $base_url?>/Leave_req">Leaves (Admin) <span class="badge rounded-pill bg-primary float-end">1</span></a></li>
+        <!-- <li><a href="<?php //echo $base_url?>/LeaveEmployee">Leaves (Employee)</a></li> -->
         <!-- <li><a href="leave-settings.html">Leave Settings</a></li> -->
         <li><a href="<?php echo $base_url?>/Attendence">Attendance (Admin)</a></li>
         <li><a href="<?php echo $base_url?>/AttendenceEmp">Attendance (Employee)</a></li>

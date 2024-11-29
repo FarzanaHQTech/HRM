@@ -1,5 +1,5 @@
 <?php
-class RequestController{
+class Request_statusController{
     function index(){
         view("AttendenceAdmin");
     }
@@ -10,8 +10,7 @@ class RequestController{
         if(isset($_POST['btnCreate'])){
             $req_name = $_POST['req_name'];
             $createObj = new Request("",$req_name);
-            // print_r($createObj);
-            // die();
+            
             $results = $createObj->create();
 
            if($results){

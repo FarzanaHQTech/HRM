@@ -83,17 +83,5 @@
         </div>
         <?php endforeach;?>
 
-
-
-
     </div>
 </div>
-<script>
-    // $(function(){
-    //     alert();
-    // })
-    $(document).ready(function(){
-        alert();
-
-    })
-</script>

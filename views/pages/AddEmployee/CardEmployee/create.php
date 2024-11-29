@@ -50,8 +50,8 @@ $status = Status::display();
 			</div>
 			<div class="col-sm-6">
 				<div class="input-block mb-3">
-					<label class="col-form-label" name="password">Password</label>
-					<input class="form-control" type="password">
+					<label class="col-form-label" >Password</label>
+					<input class="form-control" name="password" type="password">
 				</div>
 			</div>
 			<!-- <div class="col-sm-6">
@@ -62,7 +62,7 @@ $status = Status::display();
 			</div> -->
 			<div class="col-sm-6">
 				<div class="input-block mb-3">
-					<label class="col-form-label">Employee ID <span class="text-danger">*</span></label>
+					<label class="col-form-label" >Employee ID <span class="text-danger">*</span></label>
 					<input type="text" class="form-control" name="id">
 				</div>
 			</div>
@@ -172,7 +172,7 @@ $status = Status::display();
 			<div class="col-md-6">
 				<div class="input-block mb-3">
 					<label class="col-form-label">Employee Type </label>
-					<select class="form-select form-control" name="martial_status_id">
+					<select class="form-select form-control" name="role_id">
 					<option data-select2-id="select2-data-9-gr0x">Select Employee Type</option>
 						<?php foreach($roles as $value):?>
 						<option value="<?php echo $value['id']?>"><?php echo $value['role_name']?></option>

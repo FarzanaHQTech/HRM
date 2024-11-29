@@ -1,3 +1,6 @@
+<?php $holidays =Holiday::display();
+?>
+
 <div class="content container-fluid">
 				
 					<!-- Page Header -->
@@ -11,7 +14,7 @@
 								</ul>
 							</div>
 							<div class="col-auto float-end ms-auto">
-								<a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_holiday"><i class="fa-solid fa-plus"></i> Add Holiday</a>
+								<a href="<?php echo $base_url?>/holiday/create" class="btn add-btn" id="btnAdd" ><i class="fa-solid fa-plus"></i> Add Holiday</a>
 							</div>
 						</div>
 					</div>
@@ -26,19 +29,23 @@
 											<th>#</th>
 											<th>Title </th>
 											<th>Holiday Date</th>
-											<th>Day</th>
-											<th class="text-end">Action</th>
+											<th >Action</th>
+											<!-- <th>Day</th> -->
+											
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach($holidays as $value):?>
 										<tr class="holiday-completed">
-											<td>1</td>
-											<td>New Year</td>
-											<td>1 Jan 2019</td>
-											<td>Sunday</td>
-											<td></td>
+											<td><?= $value['id']?></td>
+											<td><?= $value['holiday_name']?></td>
+											<td><?= $value['holiday_date']?></td>
+											<td><a href="<?php echo $base_url?>/holiday/edit/<?= $value['id']?>" class="btn btn-primary">Edit</a>
+											<a href="<?php echo $base_url?>/holiday/delete/<?= $value['id']?>" class="btn btn-danger">Delete</a>
+										</td>
 										</tr>
-										<tr class="holiday-completed">
+										<?php endforeach;?>
+										<!-- <tr class="holiday-completed">
 											<td>2</td>
 											<td>Good Friday</td>
 											<td>14 Apr 2019</td>
@@ -112,10 +119,29 @@
 													</div>
 												</div>
 											</td>
-										</tr>
+										</tr> -->
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
                 </div>
+
+			<!-- <script>
+				$(function(){
+					$("#btnAdd").on("click",function(e){
+						e.preventDefault();
+						let html = ``;
+
+					$("#btnAdd").html(html);
+					})
+				})
+			</script>
+
+<form action=""></form> -->
+
+<!-- <script>
+    $(function(){
+        confirm("Are you sure to delete");
+    })
+</script> -->

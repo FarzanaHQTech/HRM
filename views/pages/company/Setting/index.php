@@ -103,7 +103,5 @@ $companies = Company::display();
 								</div>
 							</form>
 							<script>
-    $(function() {
-        alert('This is a test alert!');
-    });
+    
 </script>

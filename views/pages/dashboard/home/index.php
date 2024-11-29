@@ -718,12 +718,3 @@
              </div>
          </div>
      <?php } ?>
-<script>
-     $(function() {
-
-        
-        alert();
-// $("select").select2();
-
-});
-</script>
