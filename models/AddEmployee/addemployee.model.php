@@ -5,7 +5,7 @@ class Allemployee
     private $id;
     private $first_name;
     private $last_name;
-    private $user_id;
+    private $username;
     private $image;
     private $email;
     private $password;
@@ -23,12 +23,12 @@ class Allemployee
     private $status_id;
     private $company_id;
 
-    public function __construct( $first_name, $last_name,$user_id, $image, $email,$password, $mobile, $department_id, $designation_id, $role_id, $dob, $address, $gender, $martial_status_id, $joining_date, $payroll_id, $experience, $status_id,$company_id)
+    public function __construct( $first_name, $last_name,$username, $image, $email,$password, $mobile, $department_id, $designation_id, $role_id, $dob, $address, $gender, $martial_status_id, $joining_date, $payroll_id, $experience, $status_id,$company_id)
     {
         // $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
-        $this->user_id = $user_id;
+        $this->username = $username;
         $this->image = $image;
         $this->email = $email;
         $this->password = $password;
@@ -51,9 +51,9 @@ class Allemployee
     public function create()
     {
         global $db;
-        $stmt = $db->prepare("INSERT INTO employees(first_name,last_name,user_id,image,email,password,mobile,department_id,designation_id,role_id,dob,address,gender,martial_status_id,joining_date,payroll_id,experience,status_id,company_id) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
+        $stmt = $db->prepare("INSERT INTO employees(first_name,last_name,username,image,email,password,mobile,department_id,designation_id,role_id,dob,address,gender,martial_status_id,joining_date,payroll_id,experience,status_id,company_id) Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
 
-        $stmt->bind_param("ssissssiiisssisisii", $this->first_name, $this->last_name,$this->user_id, $this->image, $this->email, $this->password, $this->mobile, $this->department_id, $this->designation_id, $this->role_id, $this->dob, $this->address, $this->gender, $this->martial_status_id, $this->joining_date, $this->payroll_id, $this->experience, $this->status_id, $this->company_id);
+        $stmt->bind_param("sssssssiiisssisisii", $this->first_name, $this->last_name,$this->username, $this->image, $this->email, $this->password, $this->mobile, $this->department_id, $this->designation_id, $this->role_id, $this->dob, $this->address, $this->gender, $this->martial_status_id, $this->joining_date, $this->payroll_id, $this->experience, $this->status_id, $this->company_id);
         
         return $stmt->execute();
         // if (!$employees) {

@@ -27,13 +27,8 @@ $status = Status::display();
 			<div class="col-sm-6">
 				<div class="input-block mb-3">
 					<label class="col-form-label">Username <span class="text-danger">*</span></label>
-					<select class="form-select form-control" name="user_id">
-					<option data-select2-id="select2-data-9-gr0x">Select user name</option>
-						<?php foreach($users as $value):?>
-						<option value="<?php echo $value['id']?>"><?php echo $value['username']?></option>
-						<?php endforeach;?>
-					</select>
-					<!-- <input class="form-control" type="text" name="user_id"> -->
+					<input class="form-control" type="text" name="username">
+					
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -50,16 +45,13 @@ $status = Status::display();
 			</div>
 			<div class="col-sm-6">
 				<div class="input-block mb-3">
-					<label class="col-form-label" >Password</label>
-					<input class="form-control" name="password" type="password">
+					<label for="">Is User</label>
+					<input type="checkbox" name="" id="isUser">
+					<label class="col-form-label passField" >Password</label>
+					<input class="form-control passField" name="password" type="password">
 				</div>
 			</div>
-			<!-- <div class="col-sm-6">
-				<div class="input-block mb-3">
-					<label class="col-form-label">Confirm Password</label>
-					<input class="form-control" type="password" name="password">
-				</div>
-			</div> -->
+			
 			<div class="col-sm-6">
 				<div class="input-block mb-3">
 					<label class="col-form-label" >Employee ID <span class="text-danger">*</span></label>
@@ -162,11 +154,7 @@ $status = Status::display();
 						<option value="<?php echo $value['id']?>"><?php echo $value['company_name']?></option>
 						<?php endforeach;?>
 					</select>
-					<!-- <input class="form-control" type="text" name="company_id" > -->
-					<!-- <select class="form-select form-control" name="company_id">
-						<option value="1" data-select2-id="select2-data-6-n4r2">Global Technologies</option>
-						<option value="2">Delta Infotech</option>
-					</select> -->
+				
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -189,8 +177,7 @@ $status = Status::display();
 						<option data-select2-id="select2-data-9-gr0x">Select Department</option>
 						<?php foreach($departments as $value):?>
 						<option data-select2-id="select2-data-29-3lk9" value="<?php echo $value['id']?>"><?= $value['department_name']?></option>
-						<!-- <option data-select2-id="select2-data-30-4ojr">IT Management</option>
-						<option data-select2-id="select2-data-31-j8jw">Marketing</option> -->
+						
 						<?php endforeach;?>
 					</select>
 
@@ -221,3 +208,24 @@ $status = Status::display();
 		</div>
 	</form>
 </div>
+
+<script>
+	
+
+	$(function () {
+    // Initially hide the password field
+    $(".passField").hide();
+
+    // Listen for changes on the "isUser" checkbox
+    $("#isUser").on("change", function () {
+        if ($(this).is(":checked")) {
+            // Show the password field if the checkbox is checked
+            $(".passField").show();
+        } else {
+            // Hide the password field if the checkbox is unchecked
+            $(".passField").hide();
+        }
+    });
+});
+
+</script>
