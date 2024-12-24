@@ -26,7 +26,7 @@ class Designation
         $stmt = $db->prepare("SELECT d.id, d.designation_name, dep.department_name as department 
         FROM designation d 
         JOIN departments dep ON d.department_id = dep.id");
-       // $stmt = $db->prepare("SELECT * from designation");
+        // $stmt = $db->prepare("SELECT * from designation");
 
         $stmt->execute();
         $result = $stmt->get_result();
@@ -39,26 +39,41 @@ class Designation
         }
         return $designation;
     }
-    public static function search($id) {
+    public static function search($id)
+    {
         global $db;
         $stmt = $db->prepare("SELECT * from designation where id =?");
-        $stmt->bind_param("i",$id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_object();
         return $result;
     }
-    public function update() {
+
+    // get designation ID
+    public static function get_ID($designation_name)
+    {
+        global $db;
+        $stmt = $db->prepare("SELECT d.id from designation d where designation_name =?");
+        $stmt->bind_param("s", $designation_name);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_object();
+        return $result;
+    }
+
+    public function update()
+    {
         global $db;
         $stmt = $db->prepare("UPDATE  designation set designation_name=?,department_id=? where id = ?");
         $stmt->bind_param("sii", $this->designation_name, $this->department_id, $this->id);
         $result = $stmt->execute();
         return $result;
     }
-    public static function delete($id) {
+    public static function delete($id)
+    {
         global $db;
         $stmt = $db->prepare("DELETE from designation where id = ?");
-        $stmt->bind_param("i",$id);
-        $result= $stmt->execute();
+        $stmt->bind_param("i", $id);
+        $result = $stmt->execute();
         return $result;
     }
 }

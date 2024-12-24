@@ -31,7 +31,15 @@
                     <div class="card-body">
                         <div class="welcome-info">
                             <div class="welcome-content">
-                                <h4>Welcome Back, Darlee</h4>
+                                <h4>Welcome Back,
+                                    <?php
+                                    if (isset($_SESSION['uname'])) {
+                                        $user = $_SESSION['uname'];
+                                        echo "<span>$user</span>";
+                                    } else {
+                                        echo "<span>Guest</span>";
+                                    }
+                                    ?></h4>
                                 <p>You have <span>4 meetings</span> today,</p>
                             </div>
                             <div class="welcome-img">

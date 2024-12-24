@@ -27,7 +27,7 @@ if (isset($_POST["btnSignIn"])) {
       $_SESSION["mobile"] = $row->mobile;
       $_SESSION["role_id"] = $row->role_id;
       $_SESSION["urole"] = $row->role;
-      if ($_SESSION['urole'] == "Admin" ) {
+      if ($_SESSION['urole'] == "Admin") {
         header("location:home");
       } elseif (($_SESSION['urole']) == "Employee") {
         header("location:employee");
@@ -198,9 +198,7 @@ if (isset($_POST["btnSignIn"])) {
   </script>
 
 </body>
-
+<script src="./jquery.js"></script>
 <!-- Mirrored from smarthr.dreamstechnologies.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Nov 2024 15:14:39 GMT -->
 
 </html>
-
-

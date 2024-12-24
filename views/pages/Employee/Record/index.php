@@ -1,6 +1,5 @@
 <?php
-$employees = Employee::display();
-;
+$employees = Employee::display();;
 ?>
 
 <div class="content container-fluid">
@@ -17,7 +16,7 @@ $employees = Employee::display();
 				</ul>
 			</div>
 			<div class="col-auto">
-				<a href="#" class="btn btn-primary">PDF</a>
+				<a href="#" class="btn btn-primary btn_print" onclick="print()">PDF</a>
 			</div>
 		</div>
 	</div>
@@ -84,6 +83,7 @@ $employees = Employee::display();
 							<table class="table table-striped custom-table mb-0 datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
 								<thead>
 									<tr role="row">
+										<th style="width: 179.547px;">#</th>
 										<th style="width: 179.547px;">ID</th>
 										<th style="width: 179.547px;">Employee Name</th>
 										<th style="width: 104.641px;">Employee Type</th>
@@ -109,12 +109,13 @@ $employees = Employee::display();
 
 
 
-									<?php foreach ($employees as $value): ?>
+									<?php foreach ($employees as $key => $value): ?>
 										<tr class="odd">
-											<td><?php echo $value['id'] ?></td>
+											<td><?php echo $key + 1 ?></td>
+											<td>#00<?php echo $value['id'] ?></td>
 											<td class="sorting_1">
 												<h2 class="table-avatar">
-													<a href="profile.html" class="avatar"><img src="<?php echo $base_url?>/img/employees/<?= $value['image']?>" alt="User Image"></a>
+													<a href="profile.html" class="avatar"><img src="<?php echo $base_url ?>/img/employees/<?= $value['image'] ?>" alt="User Image"></a>
 													<a href="profile.html" class="text-primary"><?php echo $value['first_name'] . " " . $value['last_name'] ?> <span></span></a>
 												</h2>
 											</td>
@@ -122,14 +123,14 @@ $employees = Employee::display();
 											<td class="text-info"><?php echo $value['email'] ?></td>
 											<td><?php echo $value['department'] ?></td>
 											<td><?php echo $value['designation'] ?></td>
-											<td><?php echo $value['joining_date'] ?></td>
+											<td><?php echo date("F d, Y", strtotime($value['joining_date'])) ?></td>
 											<td><?php echo $value['dob'] ?></td>
 											<td><?php echo $value['martial_status'] ?></td>
 											<td><?php echo $value['gender'] ?></td>
 											<td><?php echo $value['terminated_date'] ?></td>
-											
+
 											<td><?php echo $value['basic_salary'] ?></td>
-											
+
 											<td>
 												<?php echo $value['address'] ?>
 											</td>

@@ -88,16 +88,19 @@
 															<td><strong>Tax Deducted at Source (T.D.S.)</strong> <span class="float-end">$0</span></td>
 														</tr>
 														<tr>
+															<td><strong>leave</strong> <span class="float-end">$0</span></td>
+														</tr>
+														<tr>
 															<td><strong>Provident Fund</strong> <span class="float-end">$0</span></td>
 														</tr>
 														<tr>
-															<td><strong>ESI</strong> <span class="float-end">$0</span></td>
+															<td><strong>Employee State Insurance contribution(ESI)</strong> <span class="float-end">$0</span></td>
 														</tr>
 														<tr>
 															<td><strong>Loan</strong> <span class="float-end">$300</span></td>
 														</tr>
 														<tr>
-															<td><strong>Total Deductions</strong> <span class="float-end"><strong>$59698</strong></span></td>
+															<td><strong>Total Deductions</strong> <span class="float-end"><strong>$596</strong></span></td>
 														</tr>
 													</tbody>
 												</table>

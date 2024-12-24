@@ -6,7 +6,7 @@ class UserController
   public function __construct() {}
   public function create()
   {
-    view('user');
+    view('User');
   }
 
   public function save_user()
@@ -20,7 +20,7 @@ class UserController
       $company = $_POST['company'];
       // $person_id = $_POST['person_id'];
 
-      $createuser = new User(null, $user_name, $email,$password, $phone, $role, $company);
+      $createuser = new User(null, $user_name, $email, $password, $phone, $role, $company);
       // print_r($company);
       // die();
       echo $createuser->add();
@@ -31,11 +31,11 @@ class UserController
 
   public function index()
   {
-    view("user");
+    view('User');
   }
   public function search()
   {
-    view("user");
+    view('User');
   }
   function search_all()
   {
@@ -51,57 +51,59 @@ class UserController
         echo "User Role = " . $results->role_id . "<br>";
         echo "User company = " . $results->company_id . "<br>";
       }
-     
     }
-   
   }
 
-  public function edit($id){
+  public function edit($id)
+  {
 
     // $id=$_GET["id"];
-    $user= User::search($id);
+    $user = User::search($id);
     // print_r($value);
-   view("user",$user);
+    view("User", $user);
   }
 
-  public function Update_all($id) {
-    
-   
-    if(isset($_POST['updateUser'])){
+  public function Update_all($id)
+  {
+
+
+    if (isset($_POST['updateUser'])) {
       $id = htmlspecialchars($_POST['id']);
-      $user_name =htmlspecialchars($_POST['user_name']);
+      $user_name = htmlspecialchars($_POST['user_name']);
       $email = htmlspecialchars($_POST['email']);
       $phone = htmlspecialchars($_POST['phone']);
       $role = htmlspecialchars($_POST['role']);
-      $company= htmlspecialchars($_POST['company']);
+      $company = htmlspecialchars($_POST['company']);
       // $person_id = htmlspecialchars($_POST['person_id']);
 
-      $editObj = new User($id,$user_name,$email,"",$phone,$role,$company);
-      
-     $result=  $editObj->edit($id);
-     //print_r($result);
-   
-    }
-     redirect("index");
-    }
-    public function delete($id){
-      // $id=$_GET['id'];
-      // $user = User::search($id);
-      view("user",$id);
-    }
-    public function delete_confirm($id){
-      // if(isset($_POST['delete'])){
-      //   $id = $_POST['id'];
-        $result = User::delete($id);
-        print_r($result);
-      // return $result;
-      // }
-      if($result){
-      redirect("index");
-    }
+      $editObj = new User($id, $user_name, $email, "", $phone, $role, $company);
+
+      $result =  $editObj->edit($id);
+      //print_r($result);
 
     }
- function cancel(){
-  redirect("index");
- }
+    redirect("index");
   }
+  public function delete($id)
+  {
+    // $id=$_GET['id'];
+    $user = User::search($id);
+    view("User", $user);
+  }
+  public function delete_confirm($id)
+  {
+    // if(isset($_POST['delete'])){
+    //   $id = $_POST['id'];
+    $result = User::delete($id);
+    print_r($result);
+    // return $result;
+    // }
+    if ($result) {
+      redirect("index");
+    }
+  }
+  function cancel()
+  {
+    redirect("index");
+  }
+}

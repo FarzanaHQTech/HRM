@@ -11,9 +11,10 @@ class Leave
     public $remaining_leave;
     public $reason;
     public $leave_request_status_id;
+    public $payslip_item_id;
     private $db; // Database connection
 
-    public function __construct($db, $id = null, $employee_id = null, $leave_type_id = null, $start_date = null, $end_date = null, $number_of_leave = null, $remaining_leave = null, $reason = null, $leave_request_status_id = null)
+    public function __construct($db, $id = null, $employee_id = null, $leave_type_id = null, $start_date = null, $end_date = null, $number_of_leave = null, $remaining_leave = null, $reason = null, $leave_request_status_id = null, $payslip_item_id)
     {
         $this->db = $db; // Inject database connection
         $this->id = $id;
@@ -25,6 +26,7 @@ class Leave
         $this->remaining_leave = $remaining_leave;
         $this->reason = $reason;
         $this->leave_request_status_id = $leave_request_status_id;
+        $this->payslip_item_id = $payslip_item_id;
     }
 
     // Method to calculate remaining leave
@@ -76,11 +78,13 @@ class Leave
         try {
             $this->calculateRemainingLeave();
 
-            $query = "INSERT INTO leave_requests (employee_id, leave_type_id, start_date, end_date, no_of_leave, remaining_leave, reason, leave_request_status_id) 
-                      VALUES ('$this->employee_id', '$this->leave_type_id', '$this->start_date', '$this->end_date', '$this->number_of_leave', '$this->remaining_leave', '$this->reason', '$this->leave_request_status_id')";
+            $query = "INSERT INTO leave_requests (employee_id, leave_type_id, start_date, end_date, no_of_leave, remaining_leave, reason, leave_request_status_id,payslip_item_id) 
+                      VALUES ($this->employee_id, $this->leave_type_id, '$this->start_date', '$this->end_date', $this->number_of_leave, '$this->remaining_leave', '$this->reason', $this->leave_request_status_id,$this->payslip_item_id)";
 
             $result = $this->db->query($query);
 
+            // echo $query;
+            // die();
             if (!$result) {
                 throw new Exception("Error: " . $this->db->error);
             }
@@ -91,39 +95,39 @@ class Leave
         }
     }
 
-    public static function display() {
+    public static function display()
+    {
         global $db;
-    
-        $query = "SELECT leave_requests.id,CONCAT(employees.first_name,' ',employees.last_name) as employee_name, employees.image as image, leave_requests.reason,
+
+        $query = "SELECT leave_requests.id,employees.id eid,CONCAT(employees.first_name,' ',employees.last_name) as employee_name, employees.image as image, leave_requests.reason,leave_requests.leave_request_status_id,
                          leave_type.name as type, leave_requests.start_date, leave_requests.end_date, 
                          leave_requests.no_of_leave, leave_requests.remaining_leave,  leave_request_status.status_name as status
                   FROM leave_requests 
                   JOIN employees ON leave_requests.employee_id = employees.id 
                   JOIN leave_type ON leave_requests.leave_type_id = leave_type.id
-                  JOIN  leave_request_status ON leave_request_status_id =  leave_request_status.id"
-                  
-                  ;
-    
+                  JOIN  leave_request_status ON leave_request_status_id =  leave_request_status.id";
+
         // Check if the query ran successfully
         $result = $db->query($query);
-    
+
         if (!$result) {
             // Output the error if query fails
             die("Query failed: " . $db->error);
         }
-    
+
         $leave_result = [];
         while ($row = $result->fetch_assoc()) {
             $leave_result[] = $row;
         }
-    
+
         return $leave_result;
     }
-    
 
-    public static function status_check() {
+
+    public static function status_check()
+    {
         global $db;
-    
+
         $query = "
             SELECT 
                 lr.*, 
@@ -135,53 +139,103 @@ class Leave
             JOIN leave_type lt ON lr.leave_type_id = lt.id 
             JOIN leave_request_status lrs ON lr.leave_request_status_id = lrs.id
         ";
-    
+
         $result = $db->query($query);
-    
+
         if (!$result) {
             throw new Exception("Error fetching leave requests: " . $db->error);
         }
-    
+
         $leave_results = $result->fetch_all(MYSQLI_ASSOC);
         return $leave_results;
     }
-    
 
-    
-    public static function update_status($leave_id, $status_name) {
+
+    static function leave_deduction($employee_id)
+    {
         global $db;
-        
-        // Use a JOIN to get the corresponding leave_request_status_id for the status_name
-        $stmt = $db->prepare("UPDATE leave_requests 
-                              SET leave_request_status_id = (SELECT id FROM leave_request_status WHERE status_name = ? LIMIT 1)
-                              WHERE id = ?");
-        $stmt->bind_param("si", $status_name, $leave_id);
-        
-        if ($stmt->execute()) {
-            return "Leave status updated successfully.";
-        } else {
-            throw new Exception("Error updating leave status: " . $stmt->error);
-        }
-    }
-    
-        public Static function search($id){
-            global $db;
-            $stmt = $db->query("SELECT * from leave_requests where id = $id");
-            $result = $stmt->fetch_object();
-            return $result;
-        }
-    //     public  static function update_all(){
-    //         global $db;
-    //         $stmt = $db->prepare("UPDATE leave_requests 
-    //         SET leave_request_status_id = (SELECT id FROM leave_request_status WHERE status_name = ? LIMIT 1)
-    //         WHERE id = ?");
-    // $stmt->bind_param("si", $status_name, $leave_id);
+        $query = $db->prepare("SELECT leave_requests.*,  
+       SUM(leave_requests.no_of_leave) * 500 AS unpaid_leave_amount,
+       payslip_items.name AS name
+        FROM leave_requests
+        JOIN payslip_items 
+          ON leave_requests.payslip_item_id = payslip_items.id
+        WHERE leave_requests.employee_id = ? 
+          AND leave_requests.leave_request_status_id = 3 
+          AND leave_requests.leave_type_id = 7
+  
+        ");
 
-    // if ($stmt->execute()) {
-    // return "Leave status updated successfully.";
-    // } else {
-    //     throw new Exception("Error updating leave status: " . $stmt->error);
-    // }
-    //     }
-    
+        $query->bind_param("i", $employee_id);
+        $query->execute();
+        $result = $query->get_result()->fetch_assoc();
+        // $unpaid_leave = $result['unpaid_leave'] ?? 0;
+        // $leave_deduction = $unpaid_leave * 500;
+        // print_r($result);
+        // die();
+        // return $leave_deduction;
+        return $result;
+    }
+
+
+
+
+    public static function search($id)
+    {
+        global $db;
+        $stmt = $db->query("SELECT * from leave_requests where id = $id");
+        $result = $stmt->fetch_object();
+        return $result;
+    }
+    public  static function update($leave_status_id, $id)
+    {
+        global $db;
+        $stmt = $db->query("Update leave_requests set leave_request_status_id = $leave_status_id where id = $id");
+        // $result = $stmt->fetch_object();
+        return $stmt;
+    }
+    public static function delete($id)
+    {
+        global $db;
+        $stmt = $db->query("Delete  from leave_requests where id = $id");
+        // $result = $stmt->fetch_object();
+        return $stmt;
+    }
+
+    // pagination 
+
+
+    public static function pagination($page = 1, $perpage = 10, $criteria = "")
+    {
+        global $db;
+
+        // Calculate the offset for the current page
+        // $offset = ($page - 1) * $perpage;
+        $offset = ($page - 1) * $perpage;
+
+
+        // Query for paginated data
+        $stmt = $db->prepare("
+        SELECT leave_requests.id,employees.id eid,CONCAT(employees.first_name,' ',employees.last_name) as employee_name, employees.image as image, leave_requests.reason,leave_requests.leave_request_status_id,
+                         leave_type.name as type, leave_requests.start_date, leave_requests.end_date, 
+                         leave_requests.no_of_leave, leave_requests.remaining_leave,  leave_request_status.status_name as status
+                  FROM leave_requests 
+                  JOIN employees ON leave_requests.employee_id = employees.id 
+                  JOIN leave_type ON leave_requests.leave_type_id = leave_type.id
+                  JOIN  leave_request_status ON leave_request_status_id =  leave_request_status.id
+        GROUP BY 
+           leave_requests .id
+        LIMIT ?, ?
+    ");
+        $stmt->bind_param("ii", $offset, $perpage);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Query for total number of rows (for pagination links)
+        $totalResult = $db->query("SELECT COUNT(*) AS total FROM leave_requests ");
+        $totalRows = $totalResult->fetch_object()->total;
+
+        return ['data' => $data, 'total' => $totalRows];
+    }
 }

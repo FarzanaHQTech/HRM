@@ -1,21 +1,11 @@
 <?php $leave_requests = Leave::display();
 
-$leave_status = Leave::status_check();
+// echo "<pre>";
+// print_r($leave_requests);
+// echo "</pre>";
+$leave_status = Request::display();
 $employees = Employee::display();
-// function getStatusClass($status) {
-//     switch (strtolower($status)) {
-//         case 'new':
-//             return 'text-purple';
-//         case 'pending':
-//             return 'text-info';
-//         case 'approved':
-//             return 'text-success';
-//         case 'declined':
-//             return 'text-danger';
-//         default:
-//             return 'text-muted';
-//     }
-// }
+
 
 ?>
 <div class="content container-fluid">
@@ -38,7 +28,7 @@ $employees = Employee::display();
             <div class="col-auto float-end ms-auto">
 
 
-                <a href="<?php echo $base_url?>/leave_req/create" class="btn add-btn"  data-bs-target="#add_leave"><i class="fa fa-plus"></i> Add Leave</a>
+                <a href="<?php echo $base_url ?>/leave_req/create" class="btn add-btn" data-bs-target="#add_leave"><i class="fa fa-plus"></i> Add Leave</a>
 
             </div>
 
@@ -46,34 +36,6 @@ $employees = Employee::display();
     </div>
     <!-- /Page Header -->
 
-    <!-- Leave Statistics -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="stats-info">
-                <h6>Today Presents</h6>
-                <h4>12 / 60</h4>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stats-info">
-                <h6>Planned Leaves</h6>
-                <h4>8 <span>Today</span></h4>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stats-info">
-                <h6>Unplanned Leaves</h6>
-                <h4>0 <span>Today</span></h4>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stats-info">
-                <h6>Pending Requests</h6>
-                <h4>12</h4>
-            </div>
-        </div>
-    </div>
-    <!-- /Leave Statistics -->
 
     <!-- Search Filter -->
     <div class="row filter-row">
@@ -95,11 +57,13 @@ $employees = Employee::display();
         </div>
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
             <div class="input-block mb-3 ">
-                <select class="form-select form-control">
+                <select id="status_name" class="form-select form-control">
                     <option data-select2-id="select2-data-6-hunw"> -- Select -- </option>
-                    <option> Pending </option>
-                    <option> Approved </option>
-                    <option> Rejected </option>
+                    <?php foreach ($leave_status as $status): ?>
+                        <option> <?= $status['status_name'] ?> </option>
+                    <?php endforeach; ?>
+                    <!-- <option> Approved </option>
+                    <option> Rejected </option> -->
                 </select>
 
             </div>
@@ -153,93 +117,50 @@ $employees = Employee::display();
                             <table class="table table-striped custom-table mb-0 datatable dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Employee: activate to sort column descending" style="width: 271.328px;">Employee</th>
-                                        <th  rowspan="1" colspan="1" aria-label="Leave Type: activate to sort column ascending" style="width: 100.312px;">Leave Type</th>
-                                        >From</th>
-                                        <th  rowspan="1" colspan="1" aria-label="To: activate to sort column ascending" style="width: 72.2031px;">To</th>
-                                        <th  rowspan="1" colspan="1" aria-label="No of Days: activate to sort column ascending" style="width: 75.0156px;">No of Days</th>
-                                        <th  rowspan="1" colspan="1" aria-label="Reason: activate to sort column ascending" style="width: 108.5px;">Reason</th>
-                                        <th class="text-center sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 109.797px;">Status</th>
-                                        <th class="text-end sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 52.2656px;">Actions</th>
+                                        <th style="width: 271.328px;">#</th>
+                                        <th style="width: 271.328px;">Employee</th>
+                                        <th style="width: 100.312px;">Leave Type</th>
+                                        <th>From</th>
+                                        <th style="width: 72.2031px;">To</th>
+                                        <th style="width: 75.0156px;">No of Days</th>
+                                        <th style="width: 108.5px;">Reason</th>
+                                        <th style="width: 109.797px;">Status</th>
+                                        <th style="width: 52.2656px;">Actions</th>
                                     </tr>
                                 </thead>
 
-<?php foreach($leave_requests as $value):?>
-                                 <tbody>
-                                    <tr class="odd">
-                                        <td class="sorting_1">
-                                            <h2 class="table-avatar">
-                                                <a href="" class="avatar"><img src="<?= $base_url ?>/img/employees/<?php echo $value['image']?>" alt="User Image"></a>
-                                                <a> <?= $value['employee_name']?> <span>Web Designer</span></a>
-                                            </h2>
-                                        </td>
-                                        <td><?=$value['type']?></td>
-                                        <td><?= $value['start_date']?></td>
-                                        <td><?= $value['end_date']?></td>
-                                        <td><?= $value['no_of_leave']?></td>
-                                        <td><?= $value['reason']?></td>
-                                        <td class="text-center">
-                                            <div class="dropdown action-label">
-                                                <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa-regular fa-circle-dot text-success"></i> <?= $value['status']?>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="<?php echo $base_url?>/leave_req/update_status"><i class="fa-regular fa-circle-dot text-purple"></i> New</a>
-                                                    <a class="dropdown-item" href="#"><i class="fa-regular fa-circle-dot text-info"></i> Pending</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#approve_leave"><i class="fa-regular fa-circle-dot text-success"></i> Approved</a>
-                                                    <a class="dropdown-item" href="#"><i class="fa-regular fa-circle-dot text-danger"></i> Declined</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="dropdown dropdown-action">
-                                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="<?php echo $base_url?>/leave_req/edit/<?=$value['id']?>" ><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="<?php echo $base_url?>/leave_req/delete/<?= $value['id']?>" ><i class="fa-regular fa-trash-can m-r-5"></i>
-                                                        Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- <tr class="even">
-                                        <td class="sorting_1">
-                                            <h2 class="table-avatar">
-                                                <a href="https://smarthr.dreamstechnologies.com/laravel/template/public/profile" class="avatar"><img src="https://smarthr.dreamstechnologies.com/laravel/template/public/assets/img/profiles/avatar-15.jpg" alt="User Image"></a>
-                                                <a>Buster Wigton <span>Web Developer</span></a>
-                                            </h2>
-                                        </td>
-                                        <td>Hospitalisation</td>
-                                        <td>15 Jan 2019</td>
-                                        <td>25 Jan 2019</td>
-                                        <td>10 days</td>
-                                        <td>Going to Hospital</td>
-                                        <td class="text-center">
-                                            <div class="dropdown action-label">
-                                                <a class="btn btn-white btn-sm btn-rounded dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa-regular fa-circle-dot text-success"></i> Approved
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="fa-regular fa-circle-dot text-purple"></i> New</a>
-                                                    <a class="dropdown-item" href="#"><i class="fa-regular fa-circle-dot text-info"></i> Pending</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#approve_leave"><i class="fa-regular fa-circle-dot text-success"></i> Approved</a>
-                                                    <a class="dropdown-item" href="#"><i class="fa-regular fa-circle-dot text-danger"></i> Declined</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="dropdown dropdown-action">
-                                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#edit_leave"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_approve"><i class="fa-regular fa-trash-can m-r-5"></i>
-                                                        Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr> -->
-                                   <?php endforeach;?>
-                                </tbody>
+                                <?php foreach ($leave_requests as $key => $value): ?>
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td><?= $key + 1 ?></td>
+                                            <td class="sorting_1">
+                                                <span>E-0<?= $value['eid'] ?></span>
+                                                <h2 class="table-avatar">
+                                                    <a href="" class="avatar"><img src="<?= $base_url ?>/img/employees/<?php echo $value['image'] ?>" alt="User Image"></a>
+
+                                                    <a> <?= $value['employee_name'] ?> <span>Web Designer</span></a>
+                                                </h2>
+                                            </td>
+                                            <td><?= $value['type'] ?></td>
+                                            <td><?= date("j M Y", strtotime($value['start_date']))
+                                                ?></td>
+                                            <td><?= date("j M Y", strtotime($value['end_date'])) ?></td>
+                                            <td><?= $value['no_of_leave'] ?></td>
+                                            <td><?= $value['reason'] ?></td>
+                                            <td class="text-center">
+                                                <span class="badge rounded-pill bg-primary"><?php echo $value['status'] ?></span>
+
+                                            </td>
+                                            <td class="text-end">
+                                                <button class="btn btn-success" data-id="<?= $value['id'] ?>" id="btnApprove">Approve</button>
+                                                <button class="btn btn-primary" data-id="<?= $value['id'] ?>" id="btnDecline">Decline</button>
+                                                <button class="btn btn-danger" data-id="<?= $value['id'] ?>" id="btnDecline"><a href="<?php echo $base_url ?>/leave_req/delete/<?php echo $value['id'] ?>">Delete</a></button>
+
+                                            </td>
+                                        </tr>
+
+                                    <?php endforeach; ?>
+                                    </tbody>
                             </table>
                         </div>
                     </div>
@@ -254,7 +175,7 @@ $employees = Employee::display();
                                     <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
                                     <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
                                     <li class="paginate_button page-item next" id="DataTables_Table_0_next"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link"> <i class=" fa fa-angle-double-right"></i></a>
-                                </li>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -266,7 +187,131 @@ $employees = Employee::display();
 </div>
 
 <script>
-    $(function(){
-       
+    $(function() {
+
+        $("tbody").on("click", "#btnApprove", function() {
+            let approve_id = $(this).data("id");
+            let status_name = $(this).text();
+            // console.log(status_name);
+
+            $.ajax({
+                url: "<?php echo $base_url ?>/api/leave/get_leave",
+                type: "get",
+                data: {
+                    id: approve_id
+
+                },
+                success: function(res) {
+                    // console.log(res);
+                    // console.log(res.leave.leave_request_status_id);
+
+                    $.ajax({
+                        url: "<?php echo $base_url ?>/Api/leaveStatus/search",
+                        type: "GET",
+                        data: {
+                            status: status_name
+                        },
+                        success: function(res) {
+                            //    console.log(res);
+                            let data = JSON.parse(res);
+                            //    console.log(data.id.id);
+                            let data_id = data.id.id;
+
+                            $.ajax({
+                                url: "<?php echo $base_url ?>/api/leave/update",
+                                type: "Get",
+                                data: {
+                                    id: approve_id,
+                                    status_id: data_id
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    let reload = JSON.parse(res)
+                                    if (reload.updated_data) {
+                                        window.location.reload(true);
+                                    }
+                                },
+                                error: function(error) {
+                                    console.log(error);
+                                }
+                            })
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    })
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+
+
+        })
+
+        // copy from approve
+
+        $("tbody").on("click", "#btnDecline", function() {
+            let decline_id = $(this).data("id");
+            let status_name = $(this).text();
+            // console.log(status_name);
+
+            $.ajax({
+                url: "<?php echo $base_url ?>/api/leave/get_leave",
+                type: "get",
+                data: {
+                    id: decline_id
+
+                },
+                success: function(res) {
+                    // console.log(res);
+                    // console.log(res.leave.leave_request_status_id);
+
+                    $.ajax({
+                        url: "<?php echo $base_url ?>/Api/leaveStatus/search",
+                        type: "GET",
+                        data: {
+                            status: status_name
+                        },
+                        success: function(res) {
+                            //    console.log(res);
+                            let data = JSON.parse(res);
+                            //    console.log(data.id.id);
+                            let data_id = data.id.id;
+
+                            $.ajax({
+                                url: "<?php echo $base_url ?>/api/leave/update",
+                                type: "Get",
+                                data: {
+                                    id: decline_id,
+                                    status_id: data_id
+                                },
+                                success: function(res) {
+                                    console.log(res);
+                                    let reload = JSON.parse(res)
+                                    if (reload.updated_data) {
+                                        window.location.reload(true);
+                                    }
+                                },
+                                error: function(error) {
+                                    console.log(error);
+                                }
+                            })
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    })
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+
+
+        })
+
     })
 </script>

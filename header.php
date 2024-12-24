@@ -39,6 +39,8 @@
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="<?php echo $base_url?>/assets/plugins/morris/morris.css">
 		
+        <!-- jquery cdn  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo $base_url?>/assets/css/style.css">
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

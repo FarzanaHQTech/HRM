@@ -3,7 +3,14 @@
          <div class="page-header">
              <div class="row">
                  <div class="col-sm-12">
-                     <h3 class="page-title">Welcome Admin! </h3>
+                     <h3 class="page-title">Welcome <?php
+                                                    if (isset($_SESSION['uname'])) {
+                                                        $user = $_SESSION['uname'];
+                                                        echo "<span>$user</span>";
+                                                    } else {
+                                                        echo "<span>Guest</span>";
+                                                    }
+                                                    ?>! </h3>
                      <ul class="breadcrumb">
                          <li class="breadcrumb-item active">Dashboard</li>
                      </ul>
@@ -18,7 +25,9 @@
                      <div class="card-body">
                          <span class="dash-widget-icon"><i class="fa-solid fa-cubes"></i></span>
                          <div class="dash-widget-info">
-                             <h3>112</h3>
+                             <h3><?php
+                                    echo Allemployee::count()
+                                    ?></h3>
                              <span>Projects</span>
                          </div>
                      </div>
@@ -29,7 +38,9 @@
                      <div class="card-body">
                          <span class="dash-widget-icon"><i class="fa-solid fa-dollar-sign"></i></span>
                          <div class="dash-widget-info">
-                             <h3>44</h3>
+                             <h3><?php
+                                    echo Client::count()
+                                    ?></h3>
                              <span>Clients</span>
                          </div>
                      </div>
@@ -40,7 +51,9 @@
                      <div class="card-body">
                          <span class="dash-widget-icon"><i class="fa-regular fa-gem"></i></span>
                          <div class="dash-widget-info">
-                             <h3>37</h3>
+                             <h3><?php
+                                    echo Task::count()
+                                    ?></h3>
                              <span>Tasks</span>
                          </div>
                      </div>
@@ -51,7 +64,9 @@
                      <div class="card-body">
                          <span class="dash-widget-icon"><i class="fa-solid fa-user"></i></span>
                          <div class="dash-widget-info">
-                             <h3>218</h3>
+                             <h3><?php
+                                    echo Allemployee::count()
+                                    ?></h3>
                              <span>Employees</span>
                          </div>
                      </div>

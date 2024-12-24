@@ -1,4 +1,8 @@
-<?php $roles = Role::display() ?>
+<?php $roles = Role::display();
+// print_r($roles);
+$companies = AllCompany::display();
+// print_r($companies); 
+?>
 
 <div class="modal-content">
 	<div class="modal-header">
@@ -41,11 +45,11 @@
 				</div>
 				<div class="col-md-6">
 					<div class="input-block mb-3">
-						
+
 
 						<div class="">
 							<label for="">Is User</label>
-						<input type="checkbox" name="isUser" id="isUser">
+							<input type="checkbox" name="isUser" id="isUser">
 							<label class="col-form-label pass_field ">Password</label>
 							<input class="form-control pass_field" type="password" name="password">
 						</div>
@@ -68,7 +72,12 @@
 				<div class="col-md-6">
 					<div class="input-block mb-3">
 						<label class="col-form-label">Company Name</label>
-						<input class="form-control" type="text" name="company_name">
+						<select class="form-select form-control" name="company_name">
+							<option data-select2-id="select2-data-9-gr0x">Select Company</option>
+							<?php foreach ($companies as $value): ?>
+								<option value="<?php echo $value['id'] ?>"><?= $value['company_name'] ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 				</div>
 
@@ -217,20 +226,19 @@
 	// 	})
 	// })
 
-	$(function () {
-    // Initially hide the password field
-    $(".pass_field").hide();
+	$(function() {
+		// Initially hide the password field
+		$(".pass_field").hide();
 
-    // Listen for changes on the "isUser" checkbox
-    $("#isUser").on("change", function () {
-        if ($(this).is(":checked")) {
-            // Show the password field if the checkbox is checked
-            $(".pass_field").show();
-        } else {
-            // Hide the password field if the checkbox is unchecked
-            $(".pass_field").hide();
-        }
-    });
-});
-
+		// Listen for changes on the "isUser" checkbox
+		$("#isUser").on("change", function() {
+			if ($(this).is(":checked")) {
+				// Show the password field if the checkbox is checked
+				$(".pass_field").show();
+			} else {
+				// Hide the password field if the checkbox is unchecked
+				$(".pass_field").hide();
+			}
+		});
+	});
 </script>

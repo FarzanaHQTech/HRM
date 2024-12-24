@@ -16,6 +16,8 @@
 								include_once "menus/Administration_menu.php";
 							} elseif ($_SESSION['urole'] == "Employee") {
 								include_once "menus/emp_dash_menu.php";
+								// include_once "menus/emp_dash_menu.php";
+
 							}
 							?>
 
