@@ -59,12 +59,11 @@
 											<th>
 												<?php echo PayslipItem::html_earning_select("earning") ?>
 											</th>
-											<th><input type="text" class="earning_amount"></th>
+											<th>
+												<input type="text" class="earning_amount">
+											</th>
 
 											<td><button class="btn btn-info add_earning" id="add_earning">Add</button></td>
-										</tr>
-
-
 										</tr>
 									</thead>
 									<tbody id="earning_appned">
@@ -125,15 +124,12 @@
 							<button class="btn btn-primary process">Process</button>
 						</div>
 					</div>
-					<?php
-
-					?>
-
 
 					<div class="col-sm-12">
 						<p><strong>Net Salary:<?php //echo  $net_salary
 												?></strong> (Fifty nine thousand six hundred and ninety eight only.)</p>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -144,8 +140,8 @@
 	$(function() {
 
 		var payslipCart = new Cart("payslip");
-		//printEarning()
-		//printDeduction()
+		printEarning()
+		printDeduction()
 
 		$("#emp").on("change", function() {
 			let id = $(this).val()
@@ -182,7 +178,7 @@
 				},
 				success: function(res) {
 					let get_leave = JSON.parse(res);
-					console.log(get_leave);
+					// console.log(get_leave);
 
 
 					if (get_leave.success) {
@@ -204,14 +200,14 @@
 								unpaid_leave_amount,
 								factor: 2
 							};
-							console.log(item);
+							// console.log(item);
 
 							payslipCart.save(item);
 							printDeduction();
 
 						}
 					} else {
-						console.log("No leave deduction data available");
+						// console.log("No leave deduction data available");
 					}
 				},
 				error: function(error) {
@@ -220,6 +216,35 @@
 			});
 		});
 
+		$("#emp").on("change", function() {
+			let employee_id = $(this).val();
+			$.ajax({
+				url: "<?php echo $base_url ?>/api/employees/get_salary",
+				type: "GET",
+				data: {
+					id: employee_id
+				},
+				success: function(res) {
+					// console.log(res);
+					let basic_salary = JSON.parse(res).basic_salary;
+					console.log(basic_salary);
+					let item = {
+						item_id: basic_salary,
+						item_name: "basic_salary",
+						item_amount: basic_salary.basic_salary,
+						factor: 1
+					}
+					payslipCart.save(item)
+					printEarning()
+
+				},
+				error: function(error) {
+					console.log(error);
+				}
+			})
+
+
+		})
 
 
 
@@ -265,14 +290,12 @@
 			payslip.forEach(element => {
 
 				if (element.factor === 1) {
-					html += `
-
-	 <tr>
-	  <td>${element.item_name}</td>
-	  <td>${element.item_amount}</td>
-	  <td><button data-id="${element.item_id}" class="btn btn-warning delete_earning">R</button></td>
-	</tr>
-	`;
+					html += ` <tr>
+	  			<td>${element.item_name}</td>
+	  			<td>${element.item_amount}</td>
+	  			<td><button data-id="${element.item_id}" class="btn btn-warning delete_earning">R</button></td>
+				</tr>
+				`;
 				}
 
 

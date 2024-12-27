@@ -181,4 +181,16 @@ class Allemployee
 
         return $employee;
     }
+
+    public static function get_salary($id)
+    {
+        global $db;
+        // $basic_salary = is_numeric($basic_salary) ? "i" : "";
+        // $id = is_numeric($id) ? "i" : "";
+        $stmt = $db->prepare("SELECT id, basic_salary  from employees  where id =?");
+        $stmt->bind_param("i",  $id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_object();
+        return $result;
+    }
 }
