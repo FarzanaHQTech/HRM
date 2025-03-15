@@ -4,11 +4,11 @@ class AllCompanyController
 {
    function index()
    {
-      view('projects');
+      view('Projects');
    }
    function create()
    {
-      view('projects');
+      view('Projects');
    }
    function save()
    {
@@ -29,29 +29,18 @@ class AllCompanyController
          if ($creatObj->create()) {
             redirect("index");
          }
-
-         //    $clients = $creatObj->create();
-         //    if (isset($_POST['password'])) {
-
-         //        $createuser = new User("", $username, $email, $password, $phone, $role_id, $company_name);
-         //        echo $createuser->add();
-         //    }
-         //    if($clients){
-         //        redirect("index");
-         //    }
-
       }
    }
    function edit()
    {
-      view('projects');
+      view('Projects');
    }
    function update()
    {
-      view('projects');
+      view('Projects');
    }
    function delete()
    {
-      view('projects');
+      view('Projects');
    }
 }

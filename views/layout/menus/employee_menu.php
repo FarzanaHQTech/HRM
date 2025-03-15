@@ -23,11 +23,12 @@
         <li><a href="<?php echo $base_url ?>/Designation">Designations</a></li>
 
     </ul>
-<li><a href="<?php echo $base_url ?>/allcompany"><i class="la la-users"></i><span>Companies</span></a></li>
-<li> <a href="<?php echo $base_url ?>/client/"><i class="la la-users"></i> <span>Clients</span></a></li>
+<li><a href="<?php echo $base_url ?>/AllCompany"><i class="la la-users"></i><span>Companies</span></a></li>
+<li> <a href="<?php echo $base_url ?>/Client/"><i class="la la-users"></i> <span>Clients</span></a></li>
 <li> <a href="<?php echo $base_url ?>/project" class="subdrop"><i class="la la-rocket"></i> <span> Projects</span> </a></li>
 <!-- <a href="#"><i class="la la-rocket"></i> <span> Projects</span> <span class="menu-arrow"></span></a> -->
 <!-- <li class="submenu">
+    
    
     <ul style="display: block;">
         <li><a href="">Projects</a></li>

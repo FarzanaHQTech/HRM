@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 08:06 PM
+-- Generation Time: Jan 05, 2025 at 01:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -26,28 +26,28 @@ SET time_zone = "+00:00";
 --
 -- Stand-in structure for view `allemployeeview`
 -- (See below for the actual view)
---
-CREATE TABLE `allemployeeview` (
-`id` int(11)
-,`first_name` varchar(50)
-,`last_name` varchar(50)
-,`username` varchar(100)
-,`image` varchar(100)
-,`email` varchar(100)
-,`mobile` varchar(50)
-,`department` varchar(255)
-,`designation` varchar(100)
-,`role` varchar(50)
-,`dob` date
-,`address` varchar(100)
-,`gender` varchar(50)
-,`martial_status` varchar(100)
-,`joining_date` date
-,`terminated_date` date
-,`basic_salary` int(255)
-,`experience` varchar(100)
-,`status` varchar(50)
-);
+-- --
+-- CREATE TABLE `allemployeeview` (
+-- `id` int(11)
+-- ,`first_name` varchar(50)
+-- ,`last_name` varchar(50)
+-- ,`username` varchar(100)
+-- ,`image` varchar(100)
+-- ,`email` varchar(100)
+-- ,`mobile` varchar(50)
+-- ,`department` varchar(255)
+-- ,`designation` varchar(100)
+-- ,`role` varchar(50)
+-- ,`dob` date
+-- ,`address` varchar(100)
+-- ,`gender` varchar(50)
+-- ,`martial_status` varchar(100)
+-- ,`joining_date` date
+-- ,`terminated_date` date
+-- ,`basic_salary` int(255)
+-- ,`experience` varchar(100)
+-- ,`status` varchar(50)
+-- );
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE `allemployeeview` (
 --
 
 CREATE TABLE `attendance` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `check_in_time` time DEFAULT NULL,
@@ -82,7 +82,7 @@ INSERT INTO `attendance` (`id`, `employee_id`, `date`, `check_in_time`, `check_o
 --
 
 CREATE TABLE `attendance_status` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `status_name` varchar(50) NOT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -104,7 +104,7 @@ INSERT INTO `attendance_status` (`id`, `status_name`, `description`) VALUES
 --
 
 CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `client_name` varchar(150) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
   `image` varchar(200) NOT NULL,
@@ -135,7 +135,7 @@ INSERT INTO `clients` (`id`, `client_name`, `username`, `image`, `email`, `phone
 --
 
 CREATE TABLE `client_companies` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `company_name` varchar(50) DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
@@ -167,7 +167,7 @@ INSERT INTO `client_companies` (`id`, `company_name`, `image`, `address`, `count
 --
 
 CREATE TABLE `company` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `company_name` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
@@ -193,7 +193,7 @@ INSERT INTO `company` (`id`, `company_name`, `address`, `country`, `mobile`, `po
 --
 
 CREATE TABLE `departments` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `department_name` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL,
@@ -224,7 +224,7 @@ INSERT INTO `departments` (`id`, `department_name`, `description`, `company_id`,
 --
 
 CREATE TABLE `designation` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `designation_name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `department_id` int(11) NOT NULL,
@@ -252,7 +252,7 @@ INSERT INTO `designation` (`id`, `designation_name`, `description`, `department_
 --
 
 CREATE TABLE `employees` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `username` varchar(100) DEFAULT NULL,
@@ -288,7 +288,8 @@ INSERT INTO `employees` (`id`, `first_name`, `last_name`, `username`, `image`, `
 (4, 'Hasan', 'Khan', 'Hasan', 'hasan.jpg', 'hasan@gmail.com', 'hasan123', '01788239839', 9, 4, 3, '1995-12-05', 'Dhaka', 'Male', 1, '2022-12-14', NULL, 25000, '5 month', 1, 1, '2024-12-14 11:45:31', '2024-12-14 11:45:31'),
 (5, 'Jeffery ', 'Lalor', 'Jeffery ', 'jeffery.jpg', 'Jeffery@gmail.com', 'no value', '9978478624', 3, 5, 3, '1990-12-18', 'Barishal', 'Male', 1, '2022-12-11', NULL, 40000, '1 years', 1, 1, '2024-12-17 04:34:37', '2024-12-17 12:48:21'),
 (6, 'Lesley ', 'Grauer', 'Lesley ', 'lesley.jpg', 'Lesley@gemai.com', 'Lesley ', '9083497357', 6, 6, 3, '1999-12-11', 'Dhaka', 'Male', 1, '2023-12-18', NULL, 40000, '1 years', 1, 1, '2024-12-17 06:49:39', '2024-12-17 06:49:39'),
-(7, 'Tarah', ' Shropshire', 'Tarah', 'tarah.jpg', 'Tarah@gmail.com', 'Tarah', '01938937963', 8, 6, 1, '1999-12-26', 'Bangladesh', 'Female', 1, '2024-12-18', NULL, 30000, '1 year', 1, 1, '2024-12-17 17:31:37', '2024-12-17 17:31:37');
+(7, 'Tarah', ' Shropshire', 'Tarah', 'tarah.jpg', 'Tarah@gmail.com', 'Tarah', '01938937963', 8, 6, 1, '1999-12-26', 'Bangladesh', 'Female', 1, '2024-12-18', NULL, 30000, '1 year', 1, 1, '2024-12-17 17:31:37', '2024-12-17 17:31:37'),
+(8, 'Hera', 'Mony', NULL, NULL, 'hera@gmail.com', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 30000, NULL, NULL, NULL, '2024-12-18 16:18:59', '2024-12-18 16:18:59');
 
 -- --------------------------------------------------------
 
@@ -297,7 +298,7 @@ INSERT INTO `employees` (`id`, `first_name`, `last_name`, `username`, `image`, `
 --
 
 CREATE TABLE `employee_goals` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `goal_type_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
@@ -320,7 +321,7 @@ INSERT INTO `employee_goals` (`id`, `employee_id`, `goal_type_id`, `start_date`,
 --
 
 CREATE TABLE `employee_tasks` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `goal_type_id` int(11) NOT NULL,
@@ -346,7 +347,7 @@ INSERT INTO `employee_tasks` (`id`, `employee_id`, `name`, `goal_type_id`, `assi
 --
 
 CREATE TABLE `goal_status` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -372,7 +373,7 @@ INSERT INTO `goal_status` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `goal_types` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -399,7 +400,7 @@ INSERT INTO `goal_types` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `holiday` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `holiday_name` varchar(100) NOT NULL,
   `holiday_date` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -423,7 +424,7 @@ INSERT INTO `holiday` (`id`, `holiday_name`, `holiday_date`, `created_at`, `upda
 --
 
 CREATE TABLE `leave_requests` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `leave_type_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
@@ -431,6 +432,7 @@ CREATE TABLE `leave_requests` (
   `no_of_leave` int(11) GENERATED ALWAYS AS (to_days(`end_date`) - to_days(`start_date`) + 1) STORED,
   `remaining_leave` int(11) DEFAULT NULL,
   `leave_request_status_id` int(11) DEFAULT NULL,
+  `payslip_item_id` int(11) DEFAULT NULL,
   `reason` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -439,10 +441,18 @@ CREATE TABLE `leave_requests` (
 -- Dumping data for table `leave_requests`
 --
 
-INSERT INTO `leave_requests` (`id`, `employee_id`, `leave_type_id`, `start_date`, `end_date`, `remaining_leave`, `leave_request_status_id`, `reason`, `created_at`) VALUES
-(1, 1, 1, '2024-11-28', '2024-12-01', 4, 3, 'Personal Issue', '2024-11-29 02:33:27'),
-(2, 2, 1, '2024-11-28', '2024-11-30', 5, 3, 'Go for shopping', '2024-11-29 02:35:19'),
-(3, 3, 2, '2024-12-14', '2024-12-17', 16, 4, 'Hosipitalised', '2024-12-14 07:18:07');
+INSERT INTO `leave_requests` (`id`, `employee_id`, `leave_type_id`, `start_date`, `end_date`, `remaining_leave`, `leave_request_status_id`, `payslip_item_id`, `reason`, `created_at`) VALUES
+(1, 1, 1, '2024-11-28', '2024-12-01', 4, 3, 0, 'Personal Issue', '2024-11-29 02:33:27'),
+(2, 2, 1, '2024-11-28', '2024-11-30', 5, 3, 0, 'Go for shopping', '2024-11-29 02:35:19'),
+(3, 3, 2, '2024-12-14', '2024-12-17', 16, 4, 0, 'Hosipitalised', '2024-12-14 07:18:07'),
+(4, 1, 7, '2024-12-19', '2024-12-21', NULL, 3, 7, NULL, '2024-12-18 16:20:04'),
+(6, 4, 7, '2024-12-21', '2024-12-22', 8, 3, 7, 'sick', '2024-12-21 17:50:21'),
+(8, 5, 7, '2024-12-22', '2024-12-24', 7, 3, 7, 'family issue', '2024-12-22 11:26:49'),
+(9, 7, 7, '2024-12-10', '2024-12-16', 3, 3, 0, 'personal issue', '2024-12-22 12:09:04'),
+(10, 4, 4, '2024-12-24', '2024-12-25', 28, 3, 1, '', '2024-12-22 16:15:36'),
+(11, 6, 7, '2024-12-23', '2024-12-25', 7, 7, 1, 'sick', '2024-12-22 17:06:00'),
+(12, 2, 7, '2024-12-24', '2024-12-25', 8, 2, 7, 'sick', '2024-12-24 12:05:47'),
+(13, 6, 7, '2024-12-27', '2024-12-28', 8, 3, 7, 'Go for hospital', '2024-12-26 13:41:06');
 
 -- --------------------------------------------------------
 
@@ -451,7 +461,7 @@ INSERT INTO `leave_requests` (`id`, `employee_id`, `leave_type_id`, `start_date`
 --
 
 CREATE TABLE `leave_request_status` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `status_name` varchar(50) NOT NULL DEFAULT 'new',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -474,7 +484,7 @@ INSERT INTO `leave_request_status` (`id`, `status_name`, `created_at`, `updated_
 --
 
 CREATE TABLE `leave_type` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(50) NOT NULL,
   `total_leaves` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -492,7 +502,7 @@ INSERT INTO `leave_type` (`id`, `name`, `total_leaves`, `created_at`, `updated_a
 (4, 'Annual Leave ', 30, '2024-11-27 09:01:36', '2024-11-27 09:01:36'),
 (5, 'Sick leave', 10, '2024-11-27 09:01:57', '2024-11-27 09:01:57'),
 (6, 'Emargency Leave', 15, '2024-11-27 09:02:14', '2024-11-27 09:02:14'),
-(7, 'unpaid leave', 0, '2024-11-27 09:02:46', '2024-11-28 12:06:50'),
+(7, 'unpaid leave', 10, '2024-11-27 09:02:46', '2024-12-21 17:46:27'),
 (8, 'Other leaves', 15, '2024-11-27 09:03:08', '2024-11-27 09:03:08');
 
 -- --------------------------------------------------------
@@ -502,7 +512,7 @@ INSERT INTO `leave_type` (`id`, `name`, `total_leaves`, `created_at`, `updated_a
 --
 
 CREATE TABLE `martial_status` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -523,7 +533,7 @@ INSERT INTO `martial_status` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `payslips` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `period` varchar(100) NOT NULL,
   `paydate` date NOT NULL DEFAULT current_timestamp()
@@ -535,7 +545,12 @@ CREATE TABLE `payslips` (
 
 INSERT INTO `payslips` (`id`, `employee_id`, `period`, `paydate`) VALUES
 (1, 1, 'December 2024', '2024-12-14'),
-(2, 2, 'December 2024', '2024-12-15');
+(2, 2, 'December 2024', '2024-12-15'),
+(3, 1, 'December 2024', '2024-12-22'),
+(8, 4, 'December 2024', '2024-12-22'),
+(9, 4, 'December 2024', '2024-12-22'),
+(10, 6, 'December 2024', '2024-12-26'),
+(14, 2, 'December 2024', '2024-12-28');
 
 -- --------------------------------------------------------
 
@@ -544,7 +559,7 @@ INSERT INTO `payslips` (`id`, `employee_id`, `period`, `paydate`) VALUES
 --
 
 CREATE TABLE `payslip_details` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `payslip_id` int(11) NOT NULL,
   `payslip_item_id` int(11) NOT NULL,
   `payslip_factor` tinyint(1) NOT NULL,
@@ -565,7 +580,54 @@ INSERT INTO `payslip_details` (`id`, `payslip_id`, `payslip_item_id`, `payslip_f
 (7, 2, 5, 2, 1000),
 (8, 3, 1, 1, 40000),
 (9, 3, 2, 1, 10000),
-(10, 3, 5, 2, 1000);
+(10, 3, 5, 2, 1000),
+(11, 3, 1, 1, 40000),
+(12, 3, 6, 2, 3000),
+(13, 3, 2, 1, 10000),
+(14, 3, 5, 2, 1000),
+(15, 4, 0, 2, 1000),
+(16, 4, 5, 2, 2000),
+(17, 4, 1, 1, 30000),
+(18, 4, 2, 1, 3000),
+(19, 5, 0, 2, 1500),
+(20, 5, 1, 1, 40000),
+(21, 6, 0, 2, 1500),
+(22, 6, 1, 1, 20000),
+(23, 7, 0, 2, 1000),
+(24, 7, 1, 1, 40000),
+(25, 8, 7, 2, 1000),
+(26, 8, 1, 1, 40000),
+(27, 9, 0, 2, 1000),
+(28, 9, 1, 1, 40000),
+(29, 10, 7, 2, 1000),
+(30, 10, 1, 1, 40000),
+(31, 10, 3, 1, 10000),
+(32, 10, 5, 2, 2000),
+(33, 11, 0, 1, 40000),
+(34, 11, 7, 2, 1500),
+(35, 11, 2, 1, 5000),
+(36, 11, 5, 2, 2500),
+(37, 12, 0, 1, 40000),
+(38, 12, 7, 2, 1500),
+(39, 13, 7, 2, 1500),
+(40, 13, 0, 1, 40000),
+(41, 14, 0, 1, 30000),
+(42, 14, 5, 2, 2000),
+(43, 14, 2, 1, 5000),
+(44, 15, 7, 2, 1500),
+(45, 15, 0, 1, 40000),
+(46, 15, 1, 1, 5000),
+(47, 16, 7, 2, 1500),
+(48, 16, 0, 1, 0),
+(49, 17, 7, 2, 1500),
+(50, 17, 0, 1, 40000),
+(51, 17, 2, 1, 5000),
+(52, 18, 0, 1, 40000),
+(53, 18, 7, 2, 1500),
+(54, 19, 7, 2, 1500),
+(55, 19, 1, 1, 40000),
+(56, 20, 7, 2, 1500),
+(57, 20, 0, 1, 40000);
 
 -- --------------------------------------------------------
 
@@ -574,7 +636,7 @@ INSERT INTO `payslip_details` (`id`, `payslip_id`, `payslip_item_id`, `payslip_f
 --
 
 CREATE TABLE `payslip_items` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(200) NOT NULL,
   `factor` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -600,7 +662,7 @@ INSERT INTO `payslip_items` (`id`, `name`, `factor`) VALUES
 --
 
 CREATE TABLE `projects` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `project_name` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `start_date` date DEFAULT NULL,
@@ -622,7 +684,7 @@ CREATE TABLE `projects` (
 --
 
 CREATE TABLE `project_teams` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `project_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `role` varchar(50) DEFAULT NULL,
@@ -637,7 +699,7 @@ CREATE TABLE `project_teams` (
 --
 
 CREATE TABLE `provident_fund` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `provident_type_id` int(11) NOT NULL,
   `emp_amount` decimal(10,2) NOT NULL,
@@ -661,7 +723,7 @@ INSERT INTO `provident_fund` (`id`, `employee_id`, `provident_type_id`, `emp_amo
 --
 
 CREATE TABLE `provident_type` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `type_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -685,7 +747,7 @@ INSERT INTO `provident_type` (`id`, `type_name`) VALUES
 --
 
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `role_name` varchar(50) DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
@@ -709,7 +771,7 @@ INSERT INTO `roles` (`id`, `role_name`, `updated_at`, `created_at`) VALUES
 --
 
 CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `status_name` varchar(50) NOT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -729,7 +791,7 @@ INSERT INTO `status` (`id`, `status_name`, `description`) VALUES
 --
 
 CREATE TABLE `total_leave_taken` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `leave_type_id` int(11) NOT NULL,
   `current_taking_leave` int(11) NOT NULL DEFAULT 0,
@@ -745,7 +807,7 @@ CREATE TABLE `total_leave_taken` (
 --
 
 CREATE TABLE `trainers` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `employee_id` int(11) NOT NULL,
   `designation_id` int(11) NOT NULL,
   `email` int(11) NOT NULL,
@@ -769,7 +831,7 @@ INSERT INTO `trainers` (`id`, `employee_id`, `designation_id`, `email`, `phone`,
 --
 
 CREATE TABLE `training_lists` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `training_type_id` int(11) NOT NULL,
   `trainer_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
@@ -789,7 +851,9 @@ INSERT INTO `training_lists` (`id`, `training_type_id`, `trainer_id`, `employee_
 (1, 2, 2, 2, 0.00, 1, '2024-12-17 10:10:50', '2024-12-17 10:10:50', '2024-12-04', '2024-12-27'),
 (2, 2, 2, 4, 0.00, 1, '2024-12-17 10:10:50', '2024-12-17 10:10:50', '2024-12-04', '2024-12-27'),
 (3, 3, 2, 1, 0.00, 2, '2024-12-17 10:12:16', '2024-12-17 10:12:16', '2024-12-19', '2024-12-18'),
-(4, 3, 2, 3, 0.00, 2, '2024-12-17 10:12:16', '2024-12-17 10:12:16', '2024-12-19', '2024-12-18');
+(4, 3, 2, 3, 0.00, 2, '2024-12-17 10:12:16', '2024-12-17 10:12:16', '2024-12-19', '2024-12-18'),
+(5, 4, 2, 1, 300.00, 1, '2024-12-22 23:11:49', '2024-12-22 23:11:49', '2024-12-17', '2024-12-28'),
+(6, 4, 2, 2, 300.00, 1, '2024-12-22 23:11:49', '2024-12-22 23:11:49', '2024-12-17', '2024-12-28');
 
 -- --------------------------------------------------------
 
@@ -798,7 +862,7 @@ INSERT INTO `training_lists` (`id`, `training_type_id`, `trainer_id`, `employee_
 --
 
 CREATE TABLE `training_types` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `type_name` varchar(50) NOT NULL,
   `status` varchar(50) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -859,9 +923,9 @@ INSERT INTO `users` (`id`, `username`, `role_id`, `full_name`, `password`, `emai
 --
 -- Structure for view `allemployeeview`
 --
-DROP TABLE IF EXISTS `allemployeeview`;
+-- DROP TABLE IF EXISTS `allemployeeview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `allemployeeview`  AS SELECT `e`.`id` AS `id`, `e`.`first_name` AS `first_name`, `e`.`last_name` AS `last_name`, `e`.`username` AS `username`, `e`.`image` AS `image`, `e`.`email` AS `email`, `e`.`mobile` AS `mobile`, `dep`.`department_name` AS `department`, `des`.`designation_name` AS `designation`, `r`.`role_name` AS `role`, `e`.`dob` AS `dob`, `e`.`address` AS `address`, `e`.`gender` AS `gender`, `m`.`name` AS `martial_status`, `e`.`joining_date` AS `joining_date`, `e`.`terminated_date` AS `terminated_date`, `e`.`basic_salary` AS `basic_salary`, `e`.`experience` AS `experience`, `s`.`status_name` AS `status` FROM (((((`employees` `e` join `departments` `dep` on(`e`.`department_id` = `dep`.`id`)) join `designation` `des` on(`e`.`designation_id` = `des`.`id`)) join `roles` `r` on(`e`.`role_id` = `r`.`id`)) join `martial_status` `m` on(`e`.`martial_status_id` = `m`.`id`)) join `status` `s` on(`e`.`status_id` = `s`.`id`)) ;
+-- CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `allemployeeview`  AS SELECT `e`.`id` AS `id`, `e`.`first_name` AS `first_name`, `e`.`last_name` AS `last_name`, `e`.`username` AS `username`, `e`.`image` AS `image`, `e`.`email` AS `email`, `e`.`mobile` AS `mobile`, `dep`.`department_name` AS `department`, `des`.`designation_name` AS `designation`, `r`.`role_name` AS `role`, `e`.`dob` AS `dob`, `e`.`address` AS `address`, `e`.`gender` AS `gender`, `m`.`name` AS `martial_status`, `e`.`joining_date` AS `joining_date`, `e`.`terminated_date` AS `terminated_date`, `e`.`basic_salary` AS `basic_salary`, `e`.`experience` AS `experience`, `s`.`status_name` AS `status` FROM (((((`employees` `e` join `departments` `dep` on(`e`.`department_id` = `dep`.`id`)) join `designation` `des` on(`e`.`designation_id` = `des`.`id`)) join `roles` `r` on(`e`.`role_id` = `r`.`id`)) join `martial_status` `m` on(`e`.`martial_status_id` = `m`.`id`)) join `status` `s` on(`e`.`status_id` = `s`.`id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -1103,7 +1167,7 @@ ALTER TABLE `designation`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `employee_goals`
@@ -1139,7 +1203,7 @@ ALTER TABLE `holiday`
 -- AUTO_INCREMENT for table `leave_requests`
 --
 ALTER TABLE `leave_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `leave_request_status`
@@ -1163,13 +1227,13 @@ ALTER TABLE `martial_status`
 -- AUTO_INCREMENT for table `payslips`
 --
 ALTER TABLE `payslips`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `payslip_details`
 --
 ALTER TABLE `payslip_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `payslip_items`
@@ -1229,7 +1293,7 @@ ALTER TABLE `trainers`
 -- AUTO_INCREMENT for table `training_lists`
 --
 ALTER TABLE `training_lists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `training_types`
@@ -1241,7 +1305,7 @@ ALTER TABLE `training_types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

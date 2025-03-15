@@ -65,8 +65,7 @@ class Allemployee
     public static function display()
     {
         global $db;
-        $stmt = $db->prepare(" Select
-* from AllEmployeeView
+        $stmt = $db->prepare(" Select*from AllEmployeeView
            
         ");
 
@@ -83,18 +82,6 @@ class Allemployee
         return $employees;
     }
 
-
-    // public static function search($id){
-    //     global $db;
-
-    //     $stmt = $db->prepare("Select * from allEmployeeView where id = ?");
-    //     $stmt->bind_param("i",$id);
-    //     $stmt->execute();
-    //     $results = $stmt->get_result();
-
-    //     $employees = $results->fetch_object();
-    //     return $employees;
-    // }
 
     public static function search($id)
     {

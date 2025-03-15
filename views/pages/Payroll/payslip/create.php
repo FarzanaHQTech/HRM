@@ -216,6 +216,9 @@
 			});
 		});
 
+
+
+		// 2nd solution for basic_salary
 		$("#emp").on("change", function() {
 			let employee_id = $(this).val();
 			$.ajax({
@@ -225,27 +228,31 @@
 					id: employee_id
 				},
 				success: function(res) {
-					// console.log(res);
-					let basic_salary = JSON.parse(res).basic_salary;
-					console.log(basic_salary);
-					let item = {
-						item_id: basic_salary,
-						item_name: "basic_salary",
-						item_amount: basic_salary.basic_salary,
-						factor: 1
-					}
-					payslipCart.save(item)
-					printEarning()
+					let data = JSON.parse(res);
+					let basic_salary = data.basic_salary.basic_salary; // Fetch basic salary from the API
 
+					// Find the dropdown option with value=1
+					let earning_item_name = $("#earning option[value='1']").text();
+
+					// Create the item object
+					let item = {
+						item_id: 1, // Assuming the ID is fixed as 1 for basic_salary
+						item_name: earning_item_name,
+						item_amount: basic_salary, // Basic salary value from API
+						factor: 1
+					};
+
+					console.log(item);
+
+					// Save the item to the cart
+					payslipCart.save(item);
+					printEarning(); // Update the earnings display
 				},
 				error: function(error) {
 					console.log(error);
 				}
-			})
-
-
-		})
-
+			});
+		});
 
 
 		$(".add_earning").on("click", function() {
@@ -264,13 +271,14 @@
 			printEarning()
 		})
 
+
 		$(".add_deduction").on("click", function() {
 			let deduction_id = $("#deduction_id").val();
 			let deduction_item_name = $("#deduction_id option:selected").text(); // Fetch the name
 			let deduction_amount = $(".deduction_amount").val();
 			let item = {
 				item_id: deduction_id,
-				item_name: deduction_item_name, // This should contain the name
+				item_name: deduction_item_name,
 				item_amount: deduction_amount,
 				factor: 2
 			};
@@ -391,3 +399,8 @@
 	})
 </script>
 <script src="<?php echo $base_url ?>/js/cart.js"></script>
+<style>
+	.a {
+		border-radius: 5px;
+	}
+</style>

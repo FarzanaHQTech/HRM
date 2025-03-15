@@ -65,4 +65,61 @@ class PayslipApi
 		}
 		echo json_encode(["success" => "yes"]);
 	}
+	function payslipSave_react($data)
+	{
+
+		$payslip = new Payslip();
+		$payslip->employee_id = $data["employee_id"];
+		$payslip->period = date("F Y");
+		$payslip->paydate = date("Y-m-d");
+		// $payslip_id = $payslip->save();
+
+
+		$payslip_details = $data["payslipdata"];
+		if ($data["employee_id"] != "") {
+			$payslip_id = $payslip->save();
+		}
+		if ($payslip_id) {
+			foreach ($payslip_details as $key => $value) {
+				$payslipdetail = new PayslipDetail();
+				$payslipdetail->payslip_id = $payslip_id;
+				$payslipdetail->payslip_item_id = $value["id"];
+				$payslipdetail->payslip_factor = $value["factor"];
+				$payslipdetail->amount = $value["amount"];
+
+				$payslipdetail->save();
+			}
+		}
+
+		echo json_encode(["success" => "yes"]);
+	}
 }
+
+// function payslipSave_react($data)
+// {
+
+// 	$payslip = new Payslip();
+// 	$payslip->employee_id = $data["employee_id"];
+// 	$payslip->period = date("Y-m");
+// 	$payslip->paydate =  date("Y-m-d");
+// 	if ($data["employee_id"] != "") {
+// 		$payslip_id = $payslip->save();
+// 	}
+
+// 	if ($payslip_id) {
+
+
+
+// 		$payslip_details = $data["payslipdata"];
+
+// 		foreach ($payslip_details as $key => $value) {
+// 			$payslipdetail = new PayslipDetail();
+// 			$payslipdetail->payslip_id = $payslip_id;
+// 			$payslipdetail->payslip_item_id = $value["id"];
+// 			$payslipdetail->payslip_factor = $value["factor"];
+// 			$payslipdetail->amount = $value["amount"];
+// 			$payslipdetail->save();
+// 		}
+// 	}
+// 	echo json_encode(["success" => $data]);
+// }

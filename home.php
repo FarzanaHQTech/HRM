@@ -42,12 +42,12 @@ $uid = $_SESSION["uid"];
   <link rel="stylesheet" href="asset/plugins/summernote/summernote-bs4.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="asset/font-awesome-4.7.0/css/font-awesome.min.css">
-  <script src="./jquery.js"></script>
+  <!-- <script src="./jquery.js"></script> -->
   <!-- <script src="https://use.fontawesome.com/bf6432abac.js"></script> -->
 
   <!-- jQuery -->
 
-  <script src="asset/plugins/jquery/jquery.min.js"></script>
+  <!-- <script src="asset/plugins/jquery/jquery.min.js"></script> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

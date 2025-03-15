@@ -14,54 +14,7 @@ $employee = Allemployee::search($id);
 
 <?php //if (isset($employee)): 
 ?>
-<!-- <div class="profile-view">
-        <div class="profile-img-wrap">
-            <div class="profile-img">
-                <a href="#"><img src="<?= $base_url ?>/img/employees/<?= htmlspecialchars($employee->image) ?>" alt="User Image"></a>
-            </div>
-        </div>
-        <div class="profile-basic">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="profile-info-left">
-                        <h3 class="user-name m-t-0 mb-0"><?= htmlspecialchars($employee->first_name . ' ' . $employee->last_name) ?></h3>
-                        <h6 class="text-muted"><?= htmlspecialchars($employee->designation) ?></h6>
-                        <div class="staff-id">Employee ID : <?= htmlspecialchars($employee->id) ?></div>
-                        <div class="small doj text-muted">Date of Join: <?= htmlspecialchars($employee->joining_date) ?></div>
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <ul class="personal-info">
-                        <li>
-                            <div class="title">Phone:</div>
-                            <div class="text"><?= htmlspecialchars($employee->mobile) ?></div>
-                        </li>
-                        <li>
-                            <div class="title">Email:</div>
-                            <div class="text"><?= htmlspecialchars($employee->email) ?></div>
-                        </li>
-                        <li>
-                            <div class="title">Birthday:</div>
-                            <div class="text"><?= htmlspecialchars($employee->dob) ?></div>
-                        </li>
-                        <li>
-                            <div class="title">Address:</div>
-                            <div class="text"><?= htmlspecialchars($employee->address) ?></div>
-                        </li>
-                        <li>
-                            <div class="title">Gender:</div>
-                            <div class="text"><?= htmlspecialchars($employee->gender) ?></div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div> -->
-<?php //else: 
-?>
-<!-- <p>Employee not found!</p> -->
-<?php //endif; 
-?>
+
 
 
 

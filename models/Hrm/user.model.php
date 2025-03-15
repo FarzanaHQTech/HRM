@@ -11,7 +11,7 @@ class User
   // public $image;
   public $role_id;
   public $company_id;
-  public function __construct($id, $username, $email,$password, $mobile, $role_id, $company_id)
+  public function __construct($id, $username, $email, $password, $mobile, $role_id, $company_id)
   {
     $this->id = $id;
     $this->username = $username;
@@ -28,7 +28,7 @@ class User
     $result = $db->query("insert into users (username,email,password,mobile,role_id,company_id) values('$this->username','$this->email','$this->password','$this->mobile',$this->role_id,$this->company_id)");
     return $result;
   }
- 
+
 
   public static function display()
   {
@@ -39,14 +39,14 @@ class User
                           JOIN company c ON u.company_id = c.id
 
     ");
-    
-   // return $result;
-    if($result){
-      $user=$result->fetch_all(MYSQLI_ASSOC);
+
+    // return $result;
+    if ($result) {
+      $user = $result->fetch_all(MYSQLI_ASSOC);
       return $user;
     }
-    
-    
+
+
     // $users = $result->fetch_all(MYSQLI_ASSOC);
     // return $users;
   }
@@ -71,5 +71,25 @@ class User
     $result = $db->query("delete from users where id = $id");
 
     return $result;
+  }
+
+
+  public static function pagination($page = 1, $perpage = 10, $criteria = "")
+  {
+    global $db, $tx;
+    $top = ($page - 1) * $perpage;
+    $result = $db->query("select id,name from users $criteria limit $top,$perpage");
+    $data = [];
+    while ($row = $result->fetch_object()) {
+      $data[] = $row;
+    }
+    return $data;
+  }
+  public static function count($criteria = "")
+  {
+    global $db, $tx;
+    $result = $db->query("select count(*) from users $criteria");
+    list($count) = $result->fetch_row();
+    return $count;
   }
 }

@@ -15,15 +15,7 @@ class PayslipController extends Controller
     if (isset($data["create"])) {
       $errors = [];
       /*
-if(!preg_match("/^[\s\S]+$/",$data["employee_id"])){
-$errors["employee_id"]="Invalid employee_id";
-}
-if(!preg_match("/^[\s\S]+$/",$data["period"])){
-$errors["period"]="Invalid period";
-}
-if(!preg_match("/^[\s\S]+$/",$data["paydate"])){
-$errors["paydate"]="Invalid paydate";
-}
+
 
  */
       if (count($errors) == 0) {

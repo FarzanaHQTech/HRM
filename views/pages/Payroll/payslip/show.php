@@ -84,30 +84,14 @@
 										$total_earnings = 0;
 										$total_deduction = 0;
 
-										// foreach ($payslip_details as $detail) {
-										// 	$item_name = PayslipItem::find($detail['payslip_item_id'])->name;
-										// 	$amount = (float) $detail['amount']; // Ensure it's numeric
-										// 	if ($detail['payslip_factor'] == 1) {
-										// 		// Earnings
-										// 		$earnings[] = [
-										// 			'name' => $item_name,
-										// 			'amount' => $amount,
-										// 		];
-										// 		$total_earnings += $amount;
-										// 	} elseif ($detail['payslip_factor'] == 2) {
-										// 		// Deductions
-										// 		$deductions[] = [
-										// 			'name' => $item_name,
-										// 			'amount' => $amount,
-										// 		];
-										// 		$total_deduction += $amount;
-										// 	}
-										// }
+
 
 										$processed_ids = []; // Track processed item IDs
 
 										foreach ($payslip_details as $detail) {
 											$item_name = PayslipItem::find($detail['payslip_item_id'])->name;
+											// print_r($item_name);
+											// die();
 											$amount = (float) $detail['amount'];
 
 											if (in_array($detail['payslip_item_id'], $processed_ids)) {

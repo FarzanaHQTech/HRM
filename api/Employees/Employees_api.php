@@ -30,7 +30,7 @@ class EmployeesApi
                     "basic_salary" => $salary
                 ]);
             } else {
-                json_encode([
+                echo   json_encode([
                     "success" => false,
                     "message" => "not found salary",
                     "status" => 404,
@@ -38,7 +38,7 @@ class EmployeesApi
                 ]);
             }
         } else {
-            json_encode([
+            echo json_encode([
                 "success" => false,
                 "message" => "not found any id",
                 "status" => 500,

@@ -3,49 +3,14 @@ require_once("configs/db_config.php");
 $base_url = "cpanel";
 //require_once("library/classes/system_log.class.php");
 
-if (isset($_POST["btnSignIn"])) {
+// if (isset($_POST["btnSignIn"])) {
 
-  $username = trim($_POST["txtUsername"]);
-  $password = trim($_POST["txtPassword"]);
-  //echo $username," ",$password;
-  //$result=$db->query("select u.id,u.username,r.name from {$tx}users u,{$tx}roles r where r.id=u.role_id and u.username='$username' and u.password='$password'");
-  //  $result=$db->query("select u.id,u.full_name,u.password,u.email,u.photo,u.mobile,u.role_id,r.name role from users u,roles r where r.id=u.role_id and u.name='$username' and u.inactive=0");
+//   $username = trim($_POST["txtUsername"]);
+//   $password = trim($_POST["txtPassword"]);
+//   //echo $username," ",$password;
+//   //$result=$db->query("select u.id,u.username,r.name from {$tx}users u,{$tx}roles r where r.id=u.role_id and u.username='$username' and u.password='$password'");
+//   //  $result=$db->query("select u.id,u.full_name,u.password,u.email,u.photo,u.mobile,u.role_id,r.name role from users u,roles r where r.id=u.role_id and u.name='$username' and u.inactive=0");
 
-
-  $result = $db->query("select u.id,u.username,u.photo,u.email,u.mobile,u.password,u.role_id, r.role_name as role from users u join roles r on r.id = u.role_id");
-  // $result = $db->query("select * from users");
-
-
-  // $user = $result->fetch_object();
-  while ($row = $result->fetch_object()) {
-    if ($username == $row->username && $password == $row->password) {
-
-      $_SESSION["uid"] = $row->id;
-      $_SESSION["uname"] = $row->username;
-      $_SESSION["uphoto"] = $row->photo;
-      $_SESSION["email"] = $row->email;
-      $_SESSION["mobile"] = $row->mobile;
-      $_SESSION["role_id"] = $row->role_id;
-      $_SESSION["urole"] = $row->role;
-      if ($_SESSION['urole'] == "Admin") {
-        header("location:home");
-      } elseif (($_SESSION['urole']) == "Employee") {
-        header("location:employee");
-      }
-    } else {
-      echo "Incorrect username or password";
-    }
-  }
-
-
-
-
-  //  $now=date("Y-m-d H:i:s");
-  //  $log=new System_log("","LOGIN","Successfully logged in user : $uid-$_username",$now);
-  //  $log->save();
-
-
-}
 
 
 ?>
@@ -100,6 +65,51 @@ if (isset($_POST["btnSignIn"])) {
 
         <div class="account-box">
           <div class="account-wrapper">
+            <?php
+            if (isset($_POST["btnSignIn"])) {
+
+              $username = trim($_POST["txtUsername"]);
+              $password = trim($_POST["txtPassword"]);
+
+              $result = $db->query("SELECT u.id, u.username, u.photo, u.email, u.mobile, u.password, u.role_id, r.role_name as role FROM users u JOIN roles r ON r.id = u.role_id");
+              while ($row = $result->fetch_object()) {
+
+                if (isset($_POST["btnSignIn"])) {
+                  $username = trim($_POST["txtUsername"]);
+                  $password = trim($_POST["txtPassword"]);
+
+
+                  $isLoginSuccessful = false; // Flag to track if login is successful
+
+                  while ($row = $result->fetch_object()) {
+                    if ($username == $row->username && $password == $row->password) {
+                      $_SESSION["uid"] = $row->id;
+                      $_SESSION["uname"] = $row->username;
+                      $_SESSION["uphoto"] = $row->photo;
+                      $_SESSION["email"] = $row->email;
+                      $_SESSION["mobile"] = $row->mobile;
+                      $_SESSION["role_id"] = $row->role_id;
+                      $_SESSION["urole"] = $row->role;
+                      $isLoginSuccessful = true;
+
+                      if ($_SESSION['urole'] == "Admin") {
+                        header("Location: home");
+                        exit();
+                      } elseif ($_SESSION['urole'] == "Employee") {
+                        header("Location: employee");
+                        exit();
+                      }
+                    }
+                  }
+                }
+              }
+              if (!$isLoginSuccessful) {
+                echo "<div class='alert alert-danger text-center text-size-20'>Invalid username or password</div>";
+              }
+            }
+            ?>
+
+
             <h3 class="account-title">Login</h3>
             <p class="account-subtitle">Access to our dashboard</p>
 
@@ -143,7 +153,7 @@ if (isset($_POST["btnSignIn"])) {
   <!-- /Main Wrapper -->
 
   <!-- jQuery -->
-  <script src="assets/js/jquery-3.7.1.min.js" type="e27156786aaae10834b3c01b-text/javascript"></script>
+  <!-- <script src="assets/js/jquery-3.7.1.min.js" type="e27156786aaae10834b3c01b-text/javascript"></script> -->
 
   <!-- Bootstrap Core JS -->
   <script src="assets/js/bootstrap.bundle.min.js" type="e27156786aaae10834b3c01b-text/javascript"></script>
@@ -198,7 +208,6 @@ if (isset($_POST["btnSignIn"])) {
   </script>
 
 </body>
-<script src="./jquery.js"></script>
-<!-- Mirrored from smarthr.dreamstechnologies.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Nov 2024 15:14:39 GMT -->
+
 
 </html>

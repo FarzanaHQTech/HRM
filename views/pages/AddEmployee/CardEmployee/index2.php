@@ -26,7 +26,7 @@
 
     <!-- Search Filter -->
     <?php foreach ($employees as $values): ?>
-        <form action="<?php echo $base_url ?>/Cardemployee/profile?id=<?php echo $values['id'] ?>" method="post">
+        <form action="<?php echo $base_url ?>/CardEmployee/profile?id=<?php echo $values['id'] ?>" method="post">
         <?php endforeach; ?>
         <div class="row filter-row">
             <div class="col-sm-6 col-md-3">

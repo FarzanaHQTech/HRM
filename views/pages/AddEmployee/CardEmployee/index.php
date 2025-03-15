@@ -83,7 +83,7 @@
                     <div class="profile-widget">
                 <div class="profile-img">
                   
-                    <a href="<?php echo $base_url ?>/Cardemployee/profile?id=${employee.id}" class="avatar"><img src="<?php echo $base_url ?>/img/employees/${employee.image}" alt="User Image"></a>
+                    <a href="<?php echo $base_url ?>/CardEmployee/profile?id=${employee.id}" class="avatar"><img src="<?php echo $base_url ?>/img/employees/${employee.image}" alt="User Image"></a>
                 </div>
                 <div class="dropdown profile-action">
                     <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -128,12 +128,12 @@
                                 <div class="profile-widget">
                             <div class="profile-img">
                             
-                                <a href="<?php echo $base_url ?>/Cardemployee/profile?id=${employee.id}" class="avatar"><img src="<?php echo $base_url ?>/img/employees/${employee.image}" alt="User Image"></a>
+                                <a href="<?php echo $base_url ?>/CardEmployee/profile?id=${employee.id}" class="avatar"><img src="<?php echo $base_url ?>/img/employees/${employee.image}" alt="User Image"></a>
                             </div>
                             <div class="dropdown profile-action">
                                 <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="<?php echo $base_url ?>/cardEmployee/edit?id=${employee.id}" data-bs-target="#edit_employee"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
+                                    <a class="dropdown-item" href="<?php echo $base_url ?>/CardEmployee/edit?id=${employee.id}" data-bs-target="#edit_employee"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
                                     <a class="dropdown-item" href="<?php echo $base_url ?>/cardEmployee/delete?id=${employee.id}" data-bs-target="#delete_employee"><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
                                 </div>
                             </div>
