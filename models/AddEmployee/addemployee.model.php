@@ -128,7 +128,7 @@ class Allemployee
         $html = "<select class ='form-select form-controll w-50'  id='$name' name='$name'> 
         <option value =''>Select Employee</option>
         ";
-        $result = $db->query("SELECT id,CONCAT(first_name, ' ', last_name) AS name, designation from allEmployeeView");
+        $result = $db->query("SELECT id,CONCAT(first_name, ' ', last_name) AS name, designation from AllEmployeeView");
         while ($hrmemployee = $result->fetch_object()) {
             $html .= "<option value ='$hrmemployee->id'>$hrmemployee->name</option>";
         }

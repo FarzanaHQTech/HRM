@@ -3,7 +3,7 @@ $leave_types = Leave_type::display();
 $request_status = Request::display();
 $employees = Allemployee::display();
 $payslip_item = PayslipItem::all();
-print_r($payslip_item);
+// print_r($payslip_item);
 
 ?>
 

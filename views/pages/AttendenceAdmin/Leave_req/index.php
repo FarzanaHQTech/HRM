@@ -1,4 +1,7 @@
-<?php $leave_requests = Leave::display();
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+$leave_requests = Leave::display();
 
 // echo "<pre>";
 // print_r($leave_requests);
@@ -28,7 +31,7 @@ $employees = Employee::display();
             <div class="col-auto float-end ms-auto">
 
 
-                <a href="<?php echo $base_url ?>/leave_req/create" class="btn add-btn" data-bs-target="#add_leave"><i class="fa fa-plus"></i> Add Leave</a>
+                <a href="<?php echo $base_url ?>/Leave_req/create" class="btn add-btn" data-bs-target="#add_leave"><i class="fa fa-plus"></i> Add Leave</a>
 
             </div>
 
@@ -93,10 +96,6 @@ $employees = Employee::display();
 
 
 
-
-
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
@@ -154,7 +153,8 @@ $employees = Employee::display();
                                             <td class="text-end">
                                                 <button class="btn btn-success" data-id="<?= $value['id'] ?>" id="btnApprove">Approve</button>
                                                 <button class="btn btn-primary" data-id="<?= $value['id'] ?>" id="btnDecline">Decline</button>
-                                                <button class="btn btn-danger" data-id="<?= $value['id'] ?>" id="btnDecline"><a href="<?php echo $base_url ?>/leave_req/delete/<?php echo $value['id'] ?>">Delete</a></button>
+
+                                                <a href="<?php echo $base_url ?>/Leave_req/delete/<?php echo $value['id'] ?>">Delete</a></button>
 
                                             </td>
                                         </tr>
@@ -195,7 +195,7 @@ $employees = Employee::display();
             // console.log(status_name);
 
             $.ajax({
-                url: "<?php echo $base_url ?>/api/leave/get_leave",
+                url: "<?php echo $base_url ?>/api/Leave/get_leave",
                 type: "get",
                 data: {
                     id: approve_id
@@ -206,7 +206,7 @@ $employees = Employee::display();
                     // console.log(res.leave.leave_request_status_id);
 
                     $.ajax({
-                        url: "<?php echo $base_url ?>/Api/leaveStatus/search",
+                        url: "<?php echo $base_url ?>/api/LeaveStatus/search",
                         type: "GET",
                         data: {
                             status: status_name
@@ -218,7 +218,7 @@ $employees = Employee::display();
                             let data_id = data.id.id;
 
                             $.ajax({
-                                url: "<?php echo $base_url ?>/api/leave/update",
+                                url: "<?php echo $base_url ?>/api/Leave/update",
                                 type: "Get",
                                 data: {
                                     id: approve_id,
@@ -258,7 +258,7 @@ $employees = Employee::display();
             // console.log(status_name);
 
             $.ajax({
-                url: "<?php echo $base_url ?>/api/leave/get_leave",
+                url: "<?php echo $base_url ?>/api/Leave/get_leave",
                 type: "get",
                 data: {
                     id: decline_id
@@ -269,7 +269,7 @@ $employees = Employee::display();
                     // console.log(res.leave.leave_request_status_id);
 
                     $.ajax({
-                        url: "<?php echo $base_url ?>/Api/leaveStatus/search",
+                        url: "<?php echo $base_url ?>/Api/LeaveStatus/search",
                         type: "GET",
                         data: {
                             status: status_name
@@ -281,7 +281,7 @@ $employees = Employee::display();
                             let data_id = data.id.id;
 
                             $.ajax({
-                                url: "<?php echo $base_url ?>/api/leave/update",
+                                url: "<?php echo $base_url ?>/api/Leave/update",
                                 type: "Get",
                                 data: {
                                     id: decline_id,

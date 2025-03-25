@@ -14,12 +14,12 @@ class Request
   public function create()
   {
     global $db;
-    $result = $db->query("insert into Leave_Request_Status(status_name) values('$this->Leave_Request_Status') ");
+    $result = $db->query("insert into leave_request_status(status_name) values('$this->Leave_Request_Status') ");
     return $result;
   }
 
   public static function search($status)
-{
+  {
     global $db;
 
     // Use a prepared statement
@@ -27,7 +27,7 @@ class Request
                            FROM leave_request_status 
                            WHERE status_name = ?");
     if (!$stmt) {
-        die('Prepare failed: ' . $db->error); // Debugging prepare error
+      die('Prepare failed: ' . $db->error); // Debugging prepare error
     }
 
     // Bind the parameter
@@ -44,14 +44,14 @@ class Request
     $stmt->close();
 
     return $get_result;
-}
+  }
 
 
 
   public static function display()
   {
     global $db;
-    $result = $db->query("SELECT * from Leave_Request_Status");
+    $result = $db->query("SELECT * from leave_request_status");
     // return $result;
     if ($result) {
       $request = $result->fetch_all(MYSQLI_ASSOC);

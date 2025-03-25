@@ -13,18 +13,18 @@ class ProvidentType extends Model implements JsonSerializable
 	public function save()
 	{
 		global $db, $tx;
-		$db->query("insert into {$tx}Provident_Type(type_name)values('$this->type_name')");
+		$db->query("insert into {$tx}provident_type(type_name)values('$this->type_name')");
 		return $db->insert_id;
 	}
 	public function update()
 	{
 		global $db, $tx;
-		$db->query("update {$tx}Provident_Type set type_name='$this->type_name' where id='$this->id'");
+		$db->query("update {$tx}provident_type set type_name='$this->type_name' where id='$this->id'");
 	}
 	public static function delete($id)
 	{
 		global $db, $tx;
-		$db->query("delete from {$tx}Provident_Type where id={$id}");
+		$db->query("delete from {$tx}provident_type where id={$id}");
 	}
 	public function jsonSerialize(): mixed
 	{
@@ -33,7 +33,7 @@ class ProvidentType extends Model implements JsonSerializable
 	public static function all()
 	{
 		global $db, $tx;
-		$result = $db->query("select id,type_name from {$tx}Provident_Type");
+		$result = $db->query("select id,type_name from {$tx}provident_type");
 		$data = [];
 		while ($providenttype = $result->fetch_object()) {
 			$data[] = $providenttype;
@@ -44,7 +44,7 @@ class ProvidentType extends Model implements JsonSerializable
 	{
 		global $db, $tx;
 		$top = ($page - 1) * $perpage;
-		$result = $db->query("select id,type_name from {$tx}Provident_Type $criteria limit $top,$perpage");
+		$result = $db->query("select id,type_name from {$tx}provident_type $criteria limit $top,$perpage");
 		$data = [];
 		while ($providenttype = $result->fetch_object()) {
 			$data[] = $providenttype;
@@ -54,21 +54,21 @@ class ProvidentType extends Model implements JsonSerializable
 	public static function count($criteria = "")
 	{
 		global $db, $tx;
-		$result = $db->query("select count(*) from {$tx}Provident_Type $criteria");
+		$result = $db->query("select count(*) from {$tx}provident_type $criteria");
 		list($count) = $result->fetch_row();
 		return $count;
 	}
 	public static function find($id)
 	{
 		global $db, $tx;
-		$result = $db->query("select id,type_name from {$tx}Provident_Type where id='$id'");
+		$result = $db->query("select id,type_name from {$tx}provident_type where id='$id'");
 		$providenttype = $result->fetch_object();
 		return $providenttype;
 	}
 	static function get_last_id()
 	{
 		global $db, $tx;
-		$result = $db->query("select max(id) last_id from {$tx}Provident_Type");
+		$result = $db->query("select max(id) last_id from {$tx}provident_type");
 		$providenttype = $result->fetch_object();
 		return $providenttype->last_id;
 	}
@@ -89,7 +89,7 @@ class ProvidentType extends Model implements JsonSerializable
 	{
 		global $db, $tx;
 		$html = "<select id='$name' name='$name'> ";
-		$result = $db->query("select id,name from {$tx}Provident_Type");
+		$result = $db->query("select id,name from {$tx}provident_type");
 		while ($providenttype = $result->fetch_object()) {
 			$html .= "<option value ='$providenttype->id'>$providenttype->name</option>";
 		}
@@ -99,11 +99,11 @@ class ProvidentType extends Model implements JsonSerializable
 	static function html_table($page = 1, $perpage = 10, $criteria = "", $action = true)
 	{
 		global $db, $tx, $base_url;
-		$count_result = $db->query("select count(*) total from {$tx}Provident_Type $criteria ");
+		$count_result = $db->query("select count(*) total from {$tx}provident_type $criteria ");
 		list($total_rows) = $count_result->fetch_row();
 		$total_pages = ceil($total_rows / $perpage);
 		$top = ($page - 1) * $perpage;
-		$result = $db->query("select id,type_name from {$tx}Provident_Type $criteria limit $top,$perpage");
+		$result = $db->query("select id,type_name from {$tx}provident_type $criteria limit $top,$perpage");
 		$html = "<table class='table'>";
 		$html .= "<tr><th colspan='3'>" . Html::link(["class" => "btn btn-success", "route" => "providenttype/create", "text" => "New ProvidentType"]) . "</th></tr>";
 		if ($action) {
@@ -129,7 +129,7 @@ class ProvidentType extends Model implements JsonSerializable
 	static function html_row_details($id)
 	{
 		global $db, $tx, $base_url;
-		$result = $db->query("select id,type_name from {$tx}Provident_Type where id={$id}");
+		$result = $db->query("select id,type_name from {$tx}provident_type where id={$id}");
 		$providenttype = $result->fetch_object();
 		$html = "<table class='table'>";
 		$html .= "<tr><th colspan=\"2\">ProvidentType Show</th></tr>";

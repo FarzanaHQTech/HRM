@@ -1,9 +1,7 @@
 <?php
 class EmployeeApi
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     // Get all employees
     function index()
@@ -76,4 +74,3 @@ class EmployeeApi
         echo Allemployee::html_select();
     }
 }
-?>

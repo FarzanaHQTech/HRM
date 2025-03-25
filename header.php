@@ -1,4 +1,5 @@
-<?php session_start();
+<?php
+session_start();
 require_once("configs/config.php");
 require_once("helpers/helper.php");
 require_once("libraries/library.php");
@@ -7,13 +8,9 @@ require_once("controllers/controller.php");
 
 if (!isset($_SESSION["uid"])) header("location:$base_url");
 $uid = $_SESSION["uid"];
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
-
-<!-- Mirrored from smarthr.dreamstechnologies.com/html/template/admin-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Nov 2024 15:12:11 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -40,12 +37,14 @@ $uid = $_SESSION["uid"];
     <!-- Chart CSS -->
     <link rel="stylesheet" href="<?php echo $base_url ?>/assets/plugins/morris/morris.css">
 
-    <!-- jquery cdn  -->
+    <!-- jQuery (Only One Version) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- jQuery UI (After jQuery to Avoid Conflicts) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="<?php echo $base_url ?>/assets/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="./jquery.js"></script>
 </head>
 
 <body>
@@ -57,7 +56,5 @@ $uid = $_SESSION["uid"];
             <div class="content container-fluid pb-0">
                 <!-- Page Header -->
                 <?php include("views/layout/top_navbar.php"); ?>
-                <?php //include("views/layout/menus/user_menu.php");
-                ?>
                 <?php include("views/layout/main_sidebar.php"); ?>
                 <div class="content-wrapper">

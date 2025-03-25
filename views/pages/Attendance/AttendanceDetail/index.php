@@ -1,4 +1,9 @@
-<?php $attendances = Attendance::display() ?>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$attendances = Attendance::display(); // FIXED
+?>
 
 <div class="page-header">
     <div class="row">
@@ -50,19 +55,7 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
-            <!-- <tr>
-            <td>2</td>
-            <td>Jane Smith</td>
-            <td>2024-12-11</td>
-            <td>09:30 AM</td>
-            <td>05:30 PM</td>
-            <td>Late</td>
-            <td>
-                <button class="btn btn-primary btn-sm">Edit</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
-            </td>
-        </tr> -->
-            <!-- Add dynamic rows here using PHP -->
+
         </tbody>
 </form>
 </table>

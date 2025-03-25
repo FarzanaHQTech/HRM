@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // print_r($_REQUEST);
 // print_r(Payslip::all(1))
 ?>
@@ -138,238 +141,211 @@
 
 <script>
 	$(function() {
-
 		var payslipCart = new Cart("payslip");
-		printEarning()
-		printDeduction()
 
+		// Initialize Payslip Data
+		printEarning();
+		printDeduction();
+
+		// Employee Change Event
 		$("#emp").on("change", function() {
-			let id = $(this).val()
+			let id = $(this).val();
+
+			// Fetch Employee Details
 			$.ajax({
 				url: "<?php echo $base_url ?>/api/Employee/find",
-				type: "get",
+				type: "GET",
 				data: {
 					id: id
 				},
 				success: function(res) {
-					let data = JSON.parse(res)
-					// console.log();
+					let data;
+					try {
+						data = JSON.parse(res);
+					} catch (error) {
+						console.error("Invalid JSON response:", res);
+						return;
+					}
 
-					$("#designation").text(data.employee.designation);
-					$("#emp_id").text(data.employee.id);
-
-					// console.log(res);
-				},
-				error: function(res) {}
-			})
-		})
-
-
-
-		$("#emp").on("change", function() {
-			let employee_id = $(this).val();
-
-			// Fetch leave deduction details
-			$.ajax({
-				url: "<?php echo $base_url ?>/api/leave/leave_deduction",
-				type: "GET",
-				data: {
-					employee_id: employee_id
-				},
-				success: function(res) {
-					let get_leave = JSON.parse(res);
-					// console.log(get_leave);
-
-
-					if (get_leave.success) {
-						let leave_deduction_amount = get_leave.leave_deduction.unpaid_leave_amount;
-						if (leave_deduction_amount != null) {
-
-							let leave_deduction_item_id = "leave_deduction";
-							// let leave_deduction_item_name = "Leave Deduction";
-
-							$("#deduction_id").val(leave_deduction_item_id);
-							$(".deduction_amount").val(leave_deduction_amount);
-
-							let item = {
-								item_id: get_leave.leave_deduction.
-								payslip_item_id,
-
-								item_name: get_leave.leave_deduction.name,
-								item_amount: get_leave.leave_deduction.
-								unpaid_leave_amount,
-								factor: 2
-							};
-							// console.log(item);
-
-							payslipCart.save(item);
-							printDeduction();
-
-						}
+					if (data && data.employee) {
+						$("#designation").text(data.employee.designation);
+						$("#emp_id").text(data.employee.id);
 					} else {
-						// console.log("No leave deduction data available");
+						console.error("Employee data missing:", data);
 					}
 				},
-				error: function(error) {
-					console.error(error);
-				}
+				error: function(err) {
+					console.error("Error fetching employee details:", err);
+				},
 			});
-		});
 
-
-
-		// 2nd solution for basic_salary
-		$("#emp").on("change", function() {
-			let employee_id = $(this).val();
+			// Fetch Leave Deduction
 			$.ajax({
-				url: "<?php echo $base_url ?>/api/employees/get_salary",
+				url: "<?php echo $base_url ?>/api/Leave/leave_deduction",
 				type: "GET",
 				data: {
-					id: employee_id
+					employee_id: id
 				},
 				success: function(res) {
-					let data = JSON.parse(res);
-					let basic_salary = data.basic_salary.basic_salary; // Fetch basic salary from the API
+					let get_leave;
+					try {
+						get_leave = JSON.parse(res);
+					} catch (error) {
+						console.error("Invalid JSON response:", res);
+						return;
+					}
 
-					// Find the dropdown option with value=1
-					let earning_item_name = $("#earning option[value='1']").text();
+					if (get_leave.success && get_leave.leave_deduction.unpaid_leave_amount != null) {
+						let leave_deduction_item = {
+							item_id: get_leave.leave_deduction.payslip_item_id,
+							item_name: get_leave.leave_deduction.name,
+							item_amount: get_leave.leave_deduction.unpaid_leave_amount,
+							factor: 2,
+						};
 
-					// Create the item object
-					let item = {
-						item_id: 1, // Assuming the ID is fixed as 1 for basic_salary
-						item_name: earning_item_name,
-						item_amount: basic_salary, // Basic salary value from API
-						factor: 1
-					};
-
-					console.log(item);
-
-					// Save the item to the cart
-					payslipCart.save(item);
-					printEarning(); // Update the earnings display
+						payslipCart.save(leave_deduction_item);
+						printDeduction();
+					}
 				},
-				error: function(error) {
-					console.log(error);
-				}
+				error: function(err) {
+					console.error("Error fetching leave deduction:", err);
+				},
+			});
+
+			// Fetch Basic Salary
+			$.ajax({
+				url: "<?php echo $base_url ?>/api/Employee/get_salary",
+				type: "GET",
+				data: {
+					id: id
+				},
+				success: function(res) {
+					let data;
+					try {
+						data = JSON.parse(res);
+					} catch (error) {
+						console.error("Invalid JSON response:", res);
+						return;
+					}
+
+					if (data.basic_salary) {
+						let basic_salary_item = {
+							item_id: 1,
+							item_name: $("#earning option[value='1']").text(),
+							item_amount: data.basic_salary.basic_salary,
+							factor: 1,
+						};
+
+						payslipCart.save(basic_salary_item);
+						printEarning();
+					}
+				},
+				error: function(err) {
+					console.error("Error fetching salary:", err);
+				},
 			});
 		});
 
-
+		// Add Earning
 		$(".add_earning").on("click", function() {
 			let earning_id = $("#earning").val();
 			let earning_item_name = $("#earning option:selected").text();
 			let earning_amount = $(".earning_amount").val();
+
 			let item = {
 				item_id: earning_id,
 				item_name: earning_item_name,
 				item_amount: earning_amount,
-				factor: 1
-			}
-			// console.log(item);
-			// save in local storage
-			payslipCart.save(item)
-			printEarning()
-		})
+				factor: 1,
+			};
 
+			payslipCart.save(item);
+			printEarning();
+		});
 
+		// Add Deduction
 		$(".add_deduction").on("click", function() {
 			let deduction_id = $("#deduction_id").val();
-			let deduction_item_name = $("#deduction_id option:selected").text(); // Fetch the name
+			let deduction_item_name = $("#deduction_id option:selected").text();
 			let deduction_amount = $(".deduction_amount").val();
+
 			let item = {
 				item_id: deduction_id,
 				item_name: deduction_item_name,
 				item_amount: deduction_amount,
-				factor: 2
+				factor: 2,
 			};
-			payslipCart.save(item); // Save in local storage
+
+			payslipCart.save(item);
 			printDeduction();
 		});
 
-
-
-
-		// print earning
+		// Print Earnings
 		function printEarning() {
-			// get from local storage
-			let payslip = payslipCart.getCart()
-			// console.log(payslip);
+			let payslip = payslipCart.getCart() || []; // Ensure it's always an array
 			let html = "";
+
 			payslip.forEach(element => {
-
 				if (element.factor === 1) {
-					html += ` <tr>
-	  			<td>${element.item_name}</td>
-	  			<td>${element.item_amount}</td>
-	  			<td><button data-id="${element.item_id}" class="btn btn-warning delete_earning">R</button></td>
-				</tr>
-				`;
+					html += `<tr>
+                    <td>${element.item_name}</td>
+                    <td>${element.item_amount}</td>
+                    <td><button data-id="${element.item_id}" class="btn btn-warning delete_earning">R</button></td>
+                </tr>`;
 				}
-
-
 			});
-			// console.log(html);
-			$("#earning_appned").html(html)
 
+			$("#earning_appned").html(html);
 		}
-		// print deduction
+
+		// Print Deductions
 		function printDeduction() {
-			// get from local storage
-			let payslip = payslipCart.getCart()
-			// console.log(payslip);
+			let payslip = payslipCart.getCart() || [];
 			let html = "";
+
 			payslip.forEach(element => {
 				if (element.factor === 2) {
-					html += `
-
-	<tr>
-	 <td>${element.item_name}</td>
-	 <td>${element.item_amount}</td>
-	 <td><button data-id="${element.item_id}" class="btn btn-warning delete_deduction">R</button></td>
-   </tr>
-   `;
+					html += `<tr>
+                    <td>${element.item_name}</td>
+                    <td>${element.item_amount}</td>
+                    <td><button data-id="${element.item_id}" class="btn btn-warning delete_deduction">R</button></td>
+                </tr>`;
 				}
-
 			});
-			// console.log(html);
-			$("#deduction_append").html(html)
 
+			$("#deduction_append").html(html);
 		}
 
-		//delete earning
-
+		// Delete Earning
 		$("body").on("click", ".delete_earning", function() {
 			let id = $(this).data("id");
-			payslipCart.delItem(id)
-			printEarning()
+			payslipCart.delItem(id);
+			printEarning();
 		});
 
+		// Delete Deduction
 		$("body").on("click", ".delete_deduction", function() {
 			let id = $(this).data("id");
-			payslipCart.delItem(id)
-			printDeduction()
+			payslipCart.delItem(id);
+			printDeduction();
 		});
 
+		// Clear Earnings
 		$("#clearAll_earning").on("click", function() {
 			payslipCart.clearCart();
-			printDeduction()
-			printEarning()
+			printDeduction();
+			printEarning();
 		});
 
-		// process for get in database
+		// Process Payslip
 		$(".process").on("click", function() {
-
-			let emp_id = $("#emp").val()
-			// let period = $("#period").text()
+			let emp_id = $("#emp").val();
 			let period = new Date().toLocaleString("default", {
 				month: "long",
 				year: "numeric"
 			});
-			let paydate = $("#paydate").text()
-			let payslipdata = payslipCart.getCart()
-
-
-			// console.log(payslipdata, paydate, period, emp_id);
+			let paydate = $("#paydate").text();
+			let payslipdata = payslipCart.getCart();
 
 			$.ajax({
 				url: "<?php echo $base_url ?>/api/Payslip/payslipSave",
@@ -378,25 +354,31 @@
 					emp_id: emp_id,
 					period: period,
 					paydate: new Date().toJSON().slice(0, 10),
-					payslipdata: payslipdata
+					payslipdata: payslipdata,
 				},
 				success: function(res) {
-					// console.log(res);
-					// alert("payslip create successfully")
-					window.location.replace("<?php echo $base_url ?>/payslip")
+					console.log("Payslip saved successfully:", res);
+					window.location.replace("<?php echo $base_url ?>/payslip");
 				},
+				error: function(err) {
+					console.error("Error saving payslip:", err);
+				},
+			});
+		});
 
-				error: function(res) {}
-			})
-
-
-		})
-		// console.log(payslipCart.getCart());
-
-
-
-
-	})
+		// Morris.js Graph Fix
+		if ($("#graph-container").length) {
+			new Morris.Bar({
+				element: 'graph-container',
+				data: [], // Add your data here
+				xkey: 'x',
+				ykeys: ['y'],
+				labels: ['Label']
+			});
+		} else {
+			console.warn("Graph container element not found.");
+		}
+	});
 </script>
 <script src="<?php echo $base_url ?>/js/cart.js"></script>
 <style>
@@ -404,3 +386,264 @@
 		border-radius: 5px;
 	}
 </style>
+
+
+
+<script>
+	//$(function() {
+	// 		var payslipCart = new Cart("payslip");
+	// 		printEarning()
+	// 		printDeduction()
+
+	// 		$("#emp").on("change", function() {
+	// 			let id = $(this).val()
+	// 			$.ajax({
+	// 				url: "<?php echo $base_url ?>/api/Employee/find",
+	// 				type: "get",
+	// 				data: {
+	// 					id: id
+	// 				},
+	// 				success: function(res) {
+	// 					let data = JSON.parse(res)
+	// 					// console.log();
+
+	// 					$("#designation").text(data.employee.designation);
+	// 					$("#emp_id").text(data.employee.id);
+
+	// 					// console.log(res);
+	// 				},
+	// 				error: function(res) {}
+	// 			})
+	// 		})
+
+
+
+	// 		$("#emp").on("change", function() {
+	// 			let employee_id = $(this).val();
+
+	// 			// Fetch leave deduction details
+	// 			$.ajax({
+	// 				url: "<?php echo $base_url ?>/api/Leave/leave_deduction",
+	// 				type: "GET",
+	// 				data: {
+	// 					employee_id: employee_id
+	// 				},
+	// 				success: function(res) {
+	// 					let get_leave = JSON.parse(res);
+	// 					// console.log(get_leave);
+
+
+	// 					if (get_leave.success) {
+	// 						let leave_deduction_amount = get_leave.leave_deduction.unpaid_leave_amount;
+	// 						if (leave_deduction_amount != null) {
+
+	// 							let leave_deduction_item_id = "leave_deduction";
+	// 							// let leave_deduction_item_name = "Leave Deduction";
+
+	// 							$("#deduction_id").val(leave_deduction_item_id);
+	// 							$(".deduction_amount").val(leave_deduction_amount);
+
+	// 							let item = {
+	// 								item_id: get_leave.leave_deduction.
+	// 								payslip_item_id,
+
+	// 								item_name: get_leave.leave_deduction.name,
+	// 								item_amount: get_leave.leave_deduction.
+	// 								unpaid_leave_amount,
+	// 								factor: 2
+	// 							};
+	// 							// console.log(item);
+
+	// 							payslipCart.save(item);
+	// 							printDeduction();
+
+	// 						}
+	// 					} else {
+	// 						// console.log("No leave deduction data available");
+	// 					}
+	// 				},
+	// 				error: function(error) {
+	// 					console.error(error);
+	// 				}
+	// 			});
+	// 		});
+
+
+
+	// 		// 2nd solution for basic_salary
+	// 		$("#emp").on("change", function() {
+	// 			let employee_id = $(this).val();
+	// 			$.ajax({
+	// 				url: "<?php echo $base_url ?>/api/Employee/get_salary",
+	// 				type: "GET",
+	// 				data: {
+	// 					id: employee_id
+	// 				},
+	// 				success: function(res) {
+	// 					let data = JSON.parse(res);
+	// 					let basic_salary = data.basic_salary.basic_salary; // Fetch basic salary from the API
+
+	// 					// Find the dropdown option with value=1
+	// 					let earning_item_name = $("#earning option[value='1']").text();
+
+	// 					// Create the item object
+	// 					let item = {
+	// 						item_id: 1, // Assuming the ID is fixed as 1 for basic_salary
+	// 						item_name: earning_item_name,
+	// 						item_amount: basic_salary, // Basic salary value from API
+	// 						factor: 1
+	// 					};
+
+	// 					console.log(item);
+
+	// 					// Save the item to the cart
+	// 					payslipCart.save(item);
+	// 					printEarning(); // Update the earnings display
+	// 				},
+	// 				error: function(error) {
+	// 					console.log(error);
+	// 				}
+	// 			});
+	// 		});
+
+
+	// 		$(".add_earning").on("click", function() {
+	// 			let earning_id = $("#earning").val();
+	// 			let earning_item_name = $("#earning option:selected").text();
+	// 			let earning_amount = $(".earning_amount").val();
+	// 			let item = {
+	// 				item_id: earning_id,
+	// 				item_name: earning_item_name,
+	// 				item_amount: earning_amount,
+	// 				factor: 1
+	// 			}
+	// 			// console.log(item);
+	// 			// save in local storage
+	// 			payslipCart.save(item)
+	// 			printEarning()
+	// 		})
+
+
+	// 		$(".add_deduction").on("click", function() {
+	// 			let deduction_id = $("#deduction_id").val();
+	// 			let deduction_item_name = $("#deduction_id option:selected").text(); // Fetch the name
+	// 			let deduction_amount = $(".deduction_amount").val();
+	// 			let item = {
+	// 				item_id: deduction_id,
+	// 				item_name: deduction_item_name,
+	// 				item_amount: deduction_amount,
+	// 				factor: 2
+	// 			};
+	// 			payslipCart.save(item); // Save in local storage
+	// 			printDeduction();
+	// 		});
+
+
+
+
+	// 		// print earning
+	// 		function printEarning() {
+	// 			// get from local storage
+	// 			let payslip = payslipCart.getCart()
+	// 			// console.log(payslip);
+	// 			let html = "";
+	// 			payslip.forEach(element => {
+
+	// 				if (element.factor === 1) {
+	// 					html += ` <tr>
+	// 	  			<td>${element.item_name}</td>
+	// 	  			<td>${element.item_amount}</td>
+	// 	  			<td><button data-id="${element.item_id}" class="btn btn-warning delete_earning">R</button></td>
+	// 				</tr>
+	// 				`;
+	// 				}
+
+
+	// 			});
+	// 			// console.log(html);
+	// 			$("#earning_appned").html(html)
+
+	// 		}
+	// 		// print deduction
+	// 		function printDeduction() {
+	// 			// get from local storage
+	// 			let payslip = payslipCart.getCart()
+	// 			// console.log(payslip);
+	// 			let html = "";
+	// 			payslip.forEach(element => {
+	// 				if (element.factor === 2) {
+	// 					html += `
+
+	// 	<tr>
+	// 	 <td>${element.item_name}</td>
+	// 	 <td>${element.item_amount}</td>
+	// 	 <td><button data-id="${element.item_id}" class="btn btn-warning delete_deduction">R</button></td>
+	//    </tr>
+	//    `;
+	// 				}
+	// 			});
+	// 			// console.log(html);
+	// 			$("#deduction_append").html(html)
+
+	// 		}
+
+	// 		//delete earning
+
+	// 		$("body").on("click", ".delete_earning", function() {
+	// 			let id = $(this).data("id");
+	// 			payslipCart.delItem(id)
+	// 			printEarning()
+	// 		});
+
+	// 		$("body").on("click", ".delete_deduction", function() {
+	// 			let id = $(this).data("id");
+	// 			payslipCart.delItem(id)
+	// 			printDeduction()
+	// 		});
+
+	// 		$("#clearAll_earning").on("click", function() {
+	// 			payslipCart.clearCart();
+	// 			printDeduction()
+	// 			printEarning()
+	// 		});
+
+	// 		// process for get in database
+	// 		$(".process").on("click", function() {
+
+	// 			let emp_id = $("#emp").val()
+	// 			// let period = $("#period").text()
+	// 			let period = new Date().toLocaleString("default", {
+	// 				month: "long",
+	// 				year: "numeric"
+	// 			});
+	// 			let paydate = $("#paydate").text()
+	// 			let payslipdata = payslipCart.getCart()
+
+
+	// 			// console.log(payslipdata, paydate, period, emp_id);
+
+	// 			$.ajax({
+	// 				url: "<?php echo $base_url ?>/api/Payslip/payslipSave",
+	// 				type: "POST",
+	// 				data: {
+	// 					emp_id: emp_id,
+	// 					period: period,
+	// 					paydate: new Date().toJSON().slice(0, 10),
+	// 					payslipdata: payslipdata
+	// 				},
+	// 				success: function(res) {
+	// 					// console.log(res);
+	// 					// alert("payslip create successfully")
+	// 					window.location.replace("<?php echo $base_url ?>/payslip")
+	// 				},
+
+	// 				error: function(res) {}
+	// 			})
+
+
+	// 		})
+	// 		// console.log(payslipCart.getCart());
+
+	// 	})
+	// 
+</script>

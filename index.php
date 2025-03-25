@@ -12,7 +12,6 @@ $base_url = "cpanel";
 //   //  $result=$db->query("select u.id,u.full_name,u.password,u.email,u.photo,u.mobile,u.role_id,r.name role from users u,roles r where r.id=u.role_id and u.name='$username' and u.inactive=0");
 
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
@@ -208,6 +207,5 @@ $base_url = "cpanel";
   </script>
 
 </body>
-
 
 </html>

@@ -26,7 +26,7 @@ class Attendance
         $check_in_datetime = "$date $check_in_time";
         $check_out_datetime = "$date $check_out_time";
 
-        $stmt = $db->prepare("INSERT INTO Attendance (employee_id, date, check_in_time, check_out_time, attendance_status_id)VALUES (?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO attendance (employee_id, date, check_in_time, check_out_time, attendance_status_id)VALUES (?, ?, ?, ?, ?)");
 
         $stmt->bind_param("isssi", $employee_id, $date,  $check_in_datetime,  $check_out_datetime, $attendance_status_id);
         $stmt->execute();
@@ -35,31 +35,16 @@ class Attendance
         return $stmt->affected_rows > 0;
     }
 
-    // static function display()
-    // {
-    //     global $db;
-    //     $query = $db->prepare("
-    //         SELECT a.id, e.id,Concat(e.first_name, ' ', e.last_name) as employee_name, e.image, a.date, a.check_in_time, a.check_out_time, s.status_name as status
-    //         FROM Attendance a
-    //         JOIN Employees e ON a.employee_id = e.id
-    //         JOIN Attendance_Status s ON a.status_id = s.id");
 
-    //     $query->execute();
-    //     $result = $query->get_result();
-    //     $data = [];
-    //     while ($row = $result->fetch_assoc()) {
-    //         $data[] = $row;
-    //     }
-    //     return $data;
-    // }
+
     static function display()
     {
         global $db;
         $query = $db->prepare("
         SELECT a.id, e.id, CONCAT(e.first_name, ' ', e.last_name) AS employee_name, e.image, a.date, a.check_in_time, a.check_out_time, s.status_name AS status
-        FROM Attendance a
+        FROM attendance a
         JOIN Employees e ON a.employee_id = e.id
-        JOIN Attendance_Status s ON a.attendance_status_id = s.id
+        JOIN attendance_status s ON a.attendance_status_id = s.id
     ");
 
         if ($query === false) {
@@ -87,7 +72,7 @@ class Attendance
     static function find($id)
     {
         global $db;
-        $query = $db->prepare("select * from Attendance where id = ?");
+        $query = $db->prepare("select * from attendance where id = ?");
         $query->bind_param("i", $id);
         $query->execute();
         $result = $query->get_result()->fetch_object();
@@ -97,7 +82,7 @@ class Attendance
     function Update($id)
     {
         global $db;
-        $updateQuery = $db->prepare("UPDATE Attendance set( employee_id = ?, date =?, check_in_time=?,check_out_time=?,attendance_status_id=? where id = $id");
+        $updateQuery = $db->prepare("UPDATE attendance set( employee_id = ?, date =?, check_in_time=?,check_out_time=?,attendance_status_id=? where id = $id");
 
         $updateQuery->bind_param("isssi", $this->employee_id, $this->date, $this->check_in_time, $this->check_out_time, $this->attendance_status_id, $this->id);
         // $result = $query->execute();
@@ -115,9 +100,9 @@ class Attendance
                 e.first_name, 
                 e.last_name, 
                 s.status_name 
-            FROM Attendance a
+            FROM attendance a
             JOIN Employees e ON a.employee_id = e.id
-            JOIN Attendance_Status s ON a.attendance_status_id = s.id
+            JOIN attendance_status s ON a.attendance_status_id = s.id
             WHERE a.id = ?
         ");
         $joinQuery->bind_param("i", $id);
@@ -130,7 +115,7 @@ class Attendance
     static function Delete($id)
     {
         global $db;
-        $query = $db->prepare("DELETE  from Attendance where id = ?");
+        $query = $db->prepare("DELETE  from attendance where id = ?");
         $query->bind_param("i", $id);
         $result = $query->execute();
         // $result = $query->get_result()->fetch_object();

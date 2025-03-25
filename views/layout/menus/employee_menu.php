@@ -14,8 +14,8 @@
         <li class="submenu">
             <a href="#">Attendance <span class="menu-arrow"></span></a>
             <ul>
-                <li><a href="<?php echo $base_url; ?>/AttendanceDetail">Attendance Details</a></li>
-                <li><a href="<?php echo $base_url; ?>/attendancestatu">Attendance Status</a></li>
+                <li><a href="<?php echo $base_url ?>/AttendanceDetail">Attendance Details</a></li>
+                <li><a href="<?php echo $base_url ?>/attendancestatu">Attendance Status</a></li>
             </ul>
         </li>
 
