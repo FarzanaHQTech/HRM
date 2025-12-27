@@ -34,6 +34,7 @@ class AttendanceStatu extends Model implements JsonSerializable
 	}
 	public static function all()
 	{
+		
 		global $db, $tx;
 		$result = $db->query("select id,status_name,description from {$tx}attendance_status");
 		$data = [];

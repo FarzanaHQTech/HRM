@@ -23,6 +23,7 @@ class Allemployee
     private $status_id;
     private $company_id;
 
+    
     public function __construct($id, $first_name, $last_name, $username, $image, $email, $password, $mobile, $department_id, $designation_id, $role_id, $dob, $address, $gender, $martial_status_id, $joining_date, $basic_salary, $experience, $status_id, $company_id)
     {
         $this->id = $id;

@@ -1,6 +1,5 @@
 <?php $employees = Allemployee::display(); ?>
 
-
 <div class="content container-fluid pb-0">
 
     <!-- Page Header -->
@@ -103,6 +102,7 @@
                 }
             });
 
+
             $("#search_btn").on("click", function() {
                 // alert()
                 const id = $("#id").val();
@@ -122,6 +122,7 @@
                         const data = JSON.parse(res);
                         const employee = data.employee;
                         // allEmployees.push(employee);
+
 
                         let profile = `
                                 <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
@@ -151,9 +152,6 @@
 
                 $("#id").val("");
                 $("#fullName").val("");
-
-            })
-
-
+            });
         })
     </script>

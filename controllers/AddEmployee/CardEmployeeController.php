@@ -61,6 +61,7 @@ class CardEmployeeController
             if ($result) {
                 redirect("index");
             }
+            
         }
     }
 

@@ -92,8 +92,6 @@ class Attendance
         if (!$updateResult) {
             return false; // Return early if the update fails
         }
-
-        // Next, fetch the updated record with employee name and status name
         $joinQuery = $db->prepare("
             SELECT 
                 a.id, 

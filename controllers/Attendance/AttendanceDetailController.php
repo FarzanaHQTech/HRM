@@ -25,6 +25,7 @@ class AttendanceDetailController
 
 			if ($attendanceObj->createAttendance($employee_id, $date, $check_in_time, $check_out_time, $attendance_status_id)) {
 				redirect("index");
+				
 			}
 		}
 	}
